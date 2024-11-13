@@ -5,7 +5,7 @@ plugins {
 
 android {
     namespace = "by.vjacheslavkovalenko.asteroidstms"
-    compileSdk = 34
+    compileSdk = 35
 
     defaultConfig {
         applicationId = "by.vjacheslavkovalenko.asteroidstms"
