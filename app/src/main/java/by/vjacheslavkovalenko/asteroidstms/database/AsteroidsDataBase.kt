@@ -11,4 +11,6 @@ abstract class AsteroidsDataBase : RoomDatabase() {
     abstract fun getAsteroidsDao(): AsteroidsDao
 
     abstract fun getAsteroidDetailsDao(): AsteroidDetailsDao
+
+    //abstract fun getPictureOfDayDao(): PictureOfDayDao
 }

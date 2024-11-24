@@ -8,7 +8,7 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.launch
-import androidx.paging.cashedIn
+import androidx.paging.cachedIn
 import javax.inject.Inject
 
 @HiltViewModel
@@ -22,7 +22,7 @@ class ListViewModel @Inject constructor(
         viewModelScope.launch(Dispatchers.IO) {
             state.emit(
                 ListFragmentState.ListLoaded(
-                    loadAsteroidsListUseCase.loadData().cashedIn(viewModelScope)))
+                    loadAsteroidsListUseCase.loadData().cachedIn(viewModelScope)))
         }
     }
 }

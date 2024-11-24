@@ -1,9 +1,9 @@
 package by.vjacheslavkovalenko.asteroidstms.network
 
+import by.vjacheslavkovalenko.asteroidstms.Constants.APIKEY
 import by.vjacheslavkovalenko.asteroidstms.network.entity.AsteroidResponse
 import by.vjacheslavkovalenko.asteroidstms.network.entity.ListAsteroidsResponse
 import by.vjacheslavkovalenko.asteroidstms.network.entity.ListRadarAsteroidsResponse
-import by.vjacheslavkovalenko.asteroidstms.network.entity.PictureOfDay
 import by.vjacheslavkovalenko.asteroidstms.network.entity.PictureOfDayResponse
 import by.vjacheslavkovalenko.asteroidstms.utils.convertDateToString
 import by.vjacheslavkovalenko.asteroidstms.utils.toDate
@@ -20,7 +20,7 @@ interface Api {
 //baseUrl("https://api.nasa.gov/neo/rest/v1/")
     @GET("planetary/apod")
     suspend fun loadPictureOfDay(
-        @Query("api_key") apiKey: String
+        @Query("api_key") apiKey: String = APIKEY
     ): Response<PictureOfDayResponse>
 
 

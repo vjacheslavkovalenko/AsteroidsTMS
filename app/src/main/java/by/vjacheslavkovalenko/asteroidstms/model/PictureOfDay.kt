@@ -1,4 +1,4 @@
-package by.vjacheslavkovalenko.asteroidstms.network.entity
+package by.vjacheslavkovalenko.asteroidstms.model
 
 import com.google.gson.annotations.SerializedName
 

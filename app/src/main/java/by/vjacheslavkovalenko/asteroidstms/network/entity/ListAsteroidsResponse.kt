@@ -21,12 +21,14 @@ data class ListAsteroidsResponse(//запрос на все астероиды (
     @SerializedName("total_elements")
     val totalElements: Int,
     @SerializedName("near_earth_objects")
-    val allAsteroids : List<AsteroidResponse>
+    val allAsteroids: List<AsteroidResponse>,
+    // проверяю, сработает ли (так как возникает ошибка в "AsteroidsListRemoteMediator"
+    @SerializedName("name")
+    val name: String
 
     //val asteroidParameters : List<AsteroidResponse>
 
 )
-
 
 
 //data class ListFeedAsteroids( //это из запроса, который я отправлял по дате (где он находится на конкретную дату)
