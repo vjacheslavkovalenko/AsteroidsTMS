@@ -1,6 +1,6 @@
 package by.vjacheslavkovalenko.asteroidstms.model
 
-import by.vjacheslavkovalenko.asteroidstms.repository.NearEarthObjects
+import by.vjacheslavkovalenko.asteroidstms.network.entity.NearEarthObjects
 import com.google.gson.annotations.SerializedName
 
 data class AsteroidsRadar (
