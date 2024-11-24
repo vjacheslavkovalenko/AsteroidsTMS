@@ -10,7 +10,8 @@ data class AsteroidsEntity (
     @ColumnInfo("asteroidId")
     val asteroidId: String,
     //этот параметр удалить, так как взял его для проверки из другой группы (класса Page)
-    @ColumnInfo("totalElements")
-    val totalElements: Int
+    //@ColumnInfo("totalElements")
+   // val totalElements: Int
+    //он не работает: выдает ошибку, что не находит значения
 
 )
