@@ -10,3 +10,16 @@ data class PictureOfDayResponse(
     @SerializedName("url")
     val url: String
 )
+
+
+
+
+//***PERPLEX***V2
+//
+//package by.vjacheslavkovalenko.asteroidstms.network.entity
+//
+//data class PictureOfDayResponse(
+//    val title: String,
+//    val url: String,
+//    val explanation: String
+//)

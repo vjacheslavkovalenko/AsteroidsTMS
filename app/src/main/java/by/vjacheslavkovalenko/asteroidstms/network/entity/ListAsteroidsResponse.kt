@@ -133,3 +133,49 @@ data class ListAsteroidsResponse(//запрос на все астероиды (
 //    val nasa_jpl_url: String,
 //    val neo_reference_id: String
 //)
+
+
+
+
+//ии написал:
+//package by.vjacheslavkovalenko.asteroidstms.network.entity
+//
+//import com.google.gson.annotations.SerializedName
+//
+//data class AsteroidResponse(
+//    @SerializedName("id")
+//    val asteroidId: String,
+//
+//    @SerializedName("name")
+//    val nameAsteroid: String,
+//
+//    @SerializedName("estimated_diameter")
+//    val estimatedDiameter: EstimatedDiameter,
+//
+//    @SerializedName("is_potentially_hazardous_asteroid")
+//    val isPotentiallyHazardous: Boolean? = null
+//)
+//
+//data class EstimatedDiameter(
+//    @SerializedName("kilometers")
+//    val kilometers: DiameterDetails
+//)
+//
+//data class DiameterDetails(
+//    @SerializedName("estimated_diameter_min")
+//    val min: Double,
+//
+//    @SerializedName("estimated_diameter_max")
+//    val max: Double
+//)
+
+
+//***PERPLEX***
+//
+//package by.vjacheslavkovalenko.asteroidstms.network.entity
+//
+//data class ListAsteroidsResponse(
+//     val totalElements: Int,
+//     val nearEarthObjects: List<AsteroidResponse>,
+//     val name: String? = null // Опционально
+//)

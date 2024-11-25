@@ -54,3 +54,61 @@ class ApiRepositoryImpl @Inject constructor(private val api: Api) : ApiRepositor
         return api.loadAsteroidsRadar(startDate, endDate, apiKey)
     }
 }
+
+
+
+// ИИ написал:
+//class ApiRepositoryImpl @Inject constructor(private val api: Api) : ApiRepository {
+//
+//    override suspend fun loadPictureOfDay(apiKey: String): Result<PictureOfDayResponse> {
+//        return try {
+//            val response = api.loadPictureOfDay(apiKey)
+//            if (response.isSuccessful) {
+//                response.body()?.let { Result.Success(it) } ?: Result.Error(Exception("Empty response body"))
+//            } else {
+//                Result.Error(Exception("Error ${response.code()}: ${response.message()}"))
+//            }
+//        } catch (e: Exception) {
+//            Result.Error(e)
+//        }
+//    }
+//
+//    override suspend fun getListAsteroids(apiKey: String): Result<ListAsteroidsResponse> {
+//        return try {
+//            val response = api.getListAsteroids(apiKey)
+//            if (response.isSuccessful) {
+//                response.body()?.let { Result.Success(it) } ?: Result.Error(Exception("Empty response body"))
+//            } else {
+//                Result.Error(Exception("Error ${response.code()}: ${response.message()}"))
+//            }
+//        } catch (e: Exception) {
+//            Result.Error(e)
+//        }
+//    }
+//
+//    override suspend fun loadAsteroidDetails(asteroidId: String, apiKey: String): Result<AsteroidResponse> {
+//        return try {
+//            val response = api.loadAsteroidDetails(asteroidId, apiKey)
+//            if (response.isSuccessful) {
+//                response.body()?.let { Result.Success(it) } ?: Result.Error(Exception("Empty response body"))
+//            } else {
+//                Result.Error(Exception("Error ${response.code()}: ${response.message()}"))
+//            }
+//        } catch (e: Exception) {
+//            Result.Error(e)
+//        }
+//    }
+//
+//    override suspend fun loadAsteroidsRadarDetails(startDate: String, endDate: String, apiKey: String): Result<ListRadarAsteroidsResponse> {
+//        return try {
+//            val response = api.loadAsteroidsRadar(startDate, endDate, apiKey)
+//            if (response.isSuccessful) {
+//                response.body()?.let { Result.Success(it) } ?: Result.Error(Exception("Empty response body"))
+//            } else {
+//                Result.Error(Exception("Error ${response.code()}: ${response.message()}"))
+//            }
+//        } catch (e: Exception) {
+//            Result.Error(e)
+//        }
+//    }
+//}

@@ -11,3 +11,16 @@ data class Asteroids(
   //  val nameAsteroid: String,
    // val estimatedDiameter: List<Double>
 )
+
+
+//***PERPLEX***
+//
+//package by.vjacheslavkovalenko.asteroidstms.model
+//
+//data class Asteroids(
+//    val asteroidId: String,
+//    val name: String,
+//    val estimatedDiameterMin: Double,
+//    val estimatedDiameterMax: Double,
+//    val isPotentiallyHazardous: Boolean
+//)

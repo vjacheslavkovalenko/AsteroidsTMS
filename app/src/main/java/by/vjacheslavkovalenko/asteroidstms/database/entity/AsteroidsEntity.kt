@@ -15,3 +15,20 @@ data class AsteroidsEntity (
     //он не работает: выдает ошибку, что не находит значения
 
 )
+
+
+//***PERPLEX***
+//
+//package by.vjacheslavkovalenko.asteroidstms.database.entity
+//
+//import androidx.room.Entity
+//import androidx.room.PrimaryKey
+//
+//@Entity(tableName = "Asteroids")
+//data class AsteroidsEntity(
+//    @PrimaryKey val asteroidId: String,
+//    val name: String,
+//    val estimatedDiameterMin: Double,
+//    val estimatedDiameterMax: Double,
+//    val isPotentiallyHazardous: Boolean,
+//)

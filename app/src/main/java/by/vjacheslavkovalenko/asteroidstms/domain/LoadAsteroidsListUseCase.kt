@@ -1,4 +1,4 @@
-package by.vjacheslavkovalenko.asteroidstms.domen
+package by.vjacheslavkovalenko.asteroidstms.domain
 
 import androidx.paging.ExperimentalPagingApi
 import androidx.paging.Pager
@@ -30,3 +30,17 @@ class LoadAsteroidsListUseCase @Inject constructor(
         }
     }
 }
+
+
+//***PERPLEX***
+//
+//package by.vjacheslavkovalenko.asteroidstms.domain
+//
+//import by.vjacheslavkovalenko.asteroidstms.repository.CacheRepository
+//import javax.inject.Inject
+//
+//class LoadAsteroidsListUseCase @Inject constructor(private val cacheRepository: CacheRepository) {
+//
+//    suspend fun loadData() = cacheRepository.getListAsteroids()
+//}
+

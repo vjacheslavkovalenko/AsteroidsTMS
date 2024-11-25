@@ -47,7 +47,7 @@ interface Api {
     @GET("neo/rest/v1/feed")
     suspend fun loadAsteroidsRadar(
         @Query("start_date") startDate: String = LocalDate.now().toDate().convertDateToString(),
-        @Query("send_date") endDate: String = LocalDate.now().plusDays(6).toDate()
+        @Query("end_date") endDate: String = LocalDate.now().plusDays(6).toDate()
             .convertDateToString(),
         @Query("api_key") apiKey: String,
     ): Response<ListRadarAsteroidsResponse>
@@ -123,4 +123,24 @@ interface Api {
 //object Network {
 //
 //    val radarApi = retrofit.create(AsteroidRadarService::class.java)
+//}
+
+
+//***PERPLEX***
+//
+//package by.vjacheslavkovalenko.asteroidstms.network
+//
+//import retrofit2.Response
+//import retrofit2.http.GET
+//import retrofit2.http.Query
+//
+//interface Api {
+//
+//    @GET("path_to_your_api") // Замените на реальный путь к вашему API
+//    suspend fun loadPictureOfDay(@Query("api_key") apiKey: String): Response<PictureOfDayResponse>
+//
+//    @GET("path_to_your_api") // Замените на реальный путь к вашему API
+//    suspend fun getListAsteroids(@Query("api_key") apiKey: String): Response<ListAsteroidsResponse>
+//
+//    // Добавьте другие методы API по мере необходимости
 //}

@@ -35,3 +35,14 @@ data class PictureOfDay(
 //    val date : String,
 //    @Json(name = "media_type") val mediaType : String,
 //    val title : String)
+
+
+//***PERPLEX***V2
+//
+//package by.vjacheslavkovalenko.asteroidstms.model
+//
+//data class PictureOfDay(
+//    val title: String,
+//    val url: String,
+//    val explanation: String
+//)

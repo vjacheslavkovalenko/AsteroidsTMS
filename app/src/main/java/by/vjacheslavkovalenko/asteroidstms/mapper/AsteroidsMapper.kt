@@ -19,3 +19,19 @@ class AsteroidsMapper @Inject constructor() {
         )
     }
 }
+
+
+//ии написал:
+//package by.vjacheslavkovalenko.asteroidstms.database.entity
+//
+//import androidx.room.Entity
+//import androidx.room.PrimaryKey
+//
+//@Entity(tableName = "Asteroids")
+//data class AsteroidsEntity(
+//    @PrimaryKey val asteroidId: String,
+//    val name: String,
+//    val estimatedDiameterMin: Double,
+//    val estimatedDiameterMax: Double,
+//    val isPotentiallyHazardous: Boolean
+//)
