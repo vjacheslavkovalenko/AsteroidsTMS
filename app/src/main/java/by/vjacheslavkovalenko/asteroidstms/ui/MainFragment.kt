@@ -49,3 +49,25 @@ class MainFragment : Fragment() {
         binding = null // Освобождение привязки при уничтожении представления
     }
 }
+
+//
+//class MainFragment : Fragment() {
+//
+//   // ... ваш код ...
+//
+//   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+//       super.onViewCreated(view, savedInstanceState)
+//
+//       binding?.buttonAboutApp?.setOnClickListener {
+//           findNavController().navigate(R.id.action_mainFragment_to_aboutAppFragment)
+//       }
+//
+//       binding?.buttonRadarAsteroids?.setOnClickListener {
+//           findNavController().navigate(R.id.action_mainFragment_to_asteroidsRadarFragment)
+//       }
+//
+//       binding?.buttonWhatAreAsteroids?.setOnClickListener {
+//           findNavController().navigate(R.id.action_mainFragment_to_pictureOfDayFragment)
+//       }
+//   }
+//}

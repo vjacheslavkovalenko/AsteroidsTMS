@@ -1,25 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/nav_graph">
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/mainFragment">
 
     <fragment
-        aandroid:id="@+id/mainFragment"
-        aandroid:name=".ui.MainFragment">
+        android:id="@+id/aboutAppFragment"
+        android:name="by.vjacheslavkovalenko.asteroidstms.ui.AboutAppFragment"
+        android:label="AboutAppFragment" />
+    <fragment
+        android:id="@+id/pictureOfDayFragment"
+        android:name="by.vjacheslavkovalenko.asteroidstms.ui.pictureofday.PictureOfDayFragment"
+        android:label="PictureOfDayFragment" />
+    <fragment
+        android:id="@+id/mainFragment"
+        android:name="by.vjacheslavkovalenko.asteroidstms.ui.MainFragment"
+        android:label="MainFragment" >
         <action
-            aandroid:id="@+id/action_mainFragment_to_aboutAppFragment"
-            aandroid:navigateTo="@id/aboutAppFragment"/>
-        <action
-            aandroid:id="@+id/action_mainFragment_to_listFragment"
-            aandroid:navigateTo="@id/listFragment"/>
+            android:id="@+id/action_mainFragment_to_pictureOfDayFragment"
+            app:destination="@id/pictureOfDayFragment" />
     </fragment>
-
     <fragment
-        aandroid:id="@+id/aboutAppFragment"
-        aandroid:name=".ui.AboutAppFragment"/>
-
+        android:id="@+id/listFragment"
+        android:name="by.vjacheslavkovalenko.asteroidstms.ui.list.ListFragment"
+        android:label="ListFragment" />
     <fragment
-        aandroid:id="@+id/listFragment"
-        aandroid:name=".ui.list.ListFragment"/>
+        android:id="@+id/detailsFragment"
+        android:name="by.vjacheslavkovalenko.asteroidstms.ui.details.DetailsFragment"
+        android:label="DetailsFragment" />
 
 </navigation>

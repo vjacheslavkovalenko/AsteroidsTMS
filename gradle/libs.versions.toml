@@ -34,6 +34,8 @@ roomPaging = "2.6.1"
 gson = "2.11.0"
 loggingInterceptor = "4.12.0"
 hiltKsp = "2.49"
+navigationDynamicFragment = "2.8.4"
+serializationGradlePlugin = "2.0.21"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -67,11 +69,13 @@ room-paging = {group = "androidx.room", name = "room-paging", version.ref = "roo
 gson = {group = "com.google.code.gson", name = "gson", version.ref = "gson"}
 logging-interceptor = {group = "com.squareup.okhttp3", name = "logging-interceptor", version.ref = "loggingInterceptor"}
 hilt-ksp = {group = "com.google.dagger", name = "hilt-android-compiler", version.ref = "hiltKsp"}
+navigation-dynamic-fragment = {group = "androidx.navigation", name = "navigation-dynamic-features-fragment", version.ref = "navigationDynamicFragment"}
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
 kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
 hilt-android = {id = "com.google.dagger.hilt.android", version.ref = "hiltGradlePlugin"}
+serialization-plugin = {id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "serializationGradlePlugin"}
 kotlin-kapt = {id = "kotlin-kapt", version.ref = "kaptGradlePlugin"}
 
 

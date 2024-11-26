@@ -2,6 +2,7 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.hilt.android)
+    alias(libs.plugins.serialization.plugin)
 }
 
 android {
@@ -71,6 +72,7 @@ dependencies {
     implementation(libs.gson)
     implementation(libs.logging.interceptor)
     implementation(libs.hilt.ksp)
+    implementation(libs.navigation.dynamic.fragment)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)

@@ -14,14 +14,3 @@ data class AsteroidDetailsEntity(
     @ColumnInfo("estimatedDiameter")
     val estimatedDiameter: List<Double>
 )
-
-//заносит в одну "ячейки список (list) через "объединение", а не в "отдельную таблицу"
-//первый вариант
-fun skmdsnd(list: List<String>) {
-    list.joinToString(separator = ",")
-}
-
-//второй вариант
-fun serializeTypes(list: List<String>): String {
-    return list.joinToString(separator = ",")
-}

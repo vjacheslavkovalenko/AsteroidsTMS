@@ -15,12 +15,3 @@ data class PictureOfDayEntity(
     @SerializedName("explanation")
     val explanation: String
 )
-
-//***PERPLEX***V2
-//
-//@Entity(tableName = "PictureOfDay")
-//data class PictureOfDayEntity(
-//    @PrimaryKey val title: String,
-//    val url: String,
-//    val explanation: String
-//)
