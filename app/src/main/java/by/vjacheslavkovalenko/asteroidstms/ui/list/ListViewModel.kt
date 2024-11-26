@@ -10,22 +10,40 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.launch
 import androidx.paging.cachedIn
 import javax.inject.Inject
+import kotlinx.coroutines.flow.StateFlow
 
 @HiltViewModel
 class ListViewModel @Inject constructor(
     private val loadAsteroidsListUseCase: LoadAsteroidsListUseCase
 ) : ViewModel() {
+    // Используем StateFlow для состояния, чтобы UI мог наблюдать за изменениями
+    private val listFragmentStateFlow = MutableStateFlow<ListFragmentState>(ListFragmentState.Init)
+    val state: StateFlow<ListFragmentState> get() = listFragmentStateFlow // Публичный доступ только для чтения
 
-    val state = MutableStateFlow<ListFragmentState>(ListFragmentState.Init)
+//    val state = MutableStateFlow<ListFragmentState>(ListFragmentState.Init)
 
-    fun LoadData() {
+    fun loadData() {
         viewModelScope.launch(Dispatchers.IO) {
-            state.emit(
-                ListFragmentState.ListLoaded(
-                    loadAsteroidsListUseCase.loadData().cachedIn(viewModelScope)))
+//            state.emit(
+//                ListFragmentState.ListLoaded(
+//                    loadAsteroidsListUseCase.loadData().cachedIn(viewModelScope)))
+            listFragmentStateFlow.value =
+                ListFragmentState.Loading // Устанавливаем состояние загрузки
+
+            try {
+                // Получаем данные и кэшируем их в viewModelScope
+                val pagingData = loadAsteroidsListUseCase.loadData().cachedIn(viewModelScope)
+                listFragmentStateFlow.value =
+                    ListFragmentState.ListLoaded(pagingData) // Устанавливаем состояние с загруженными данными
+            } catch (e: Exception) {
+                listFragmentStateFlow.value = ListFragmentState.Error(
+                    e.message ?: "Unknown error"
+                ) // Устанавливаем состояние ошибки
+            }
         }
     }
 }
+
 
 //ии написал:
 //package by.vjacheslavkovalenko.asteroidstms.ui.list
@@ -67,8 +85,4 @@ class ListViewModel @Inject constructor(
 
 //***PERPLEX***
 //
-//package by.vjacheslavkovalenko.asteroids.ui.list
 //
-//import androidx.lifecycle.ViewModel
-// import androidx.lifecycle.viewModelScope
-// import by.vjaceslavkovalenko.domain.LoadAstroidsListUseCase

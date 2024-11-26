@@ -15,42 +15,57 @@ import java.time.LocalDate
 
 //gM0Ze05VWVs9uAcahDClWEvapDNv7m5MNiuO3TLl
 interface Api {
-
     //https://api.nasa.gov/planetary/apod?api_key=DEMO_KEY
 //baseUrl("https://api.nasa.gov/neo/rest/v1/")
     @GET("planetary/apod")
-    suspend fun loadPictureOfDay(
+//    suspend fun loadPictureOfDay(
+    suspend fun getPictureOfDay(
         @Query("api_key") apiKey: String = APIKEY
     ): Response<PictureOfDayResponse>
 
+//    @GET("neo/rest/v1/feed")
+//    suspend fun getListAsteroids(
+//        @Query("start_date") startDate: String = LocalDate.now().toDate().convertDateToString(),
+//        @Query("end_date") endDate: String = LocalDate.now().plusDays(6).toDate()
+//            .convertDateToString(),
+//        @Query("api_key") apiKey: String,
+//    ): Response<ListAsteroidsResponse>
+
+    //!!!!!!! это последнее предложил ии
+    @GET("neo/rest/v1/feed")
+    suspend fun loadAsteroidsRadar(
+        @Query("start_date") startDate: String,
+        @Query("end_date") endDate: String,
+        @Query("api_key") apiKey: String
+    ): Response<ListRadarAsteroidsResponse>
 
     //GET https://api.nasa.gov/neo/rest/v1/feed?start_date=START_DATE&end_date=END_DATE&api_key=API_KEY
     // @GET(value = "neo/rest/v1/feed")
     //GET https://api.nasa.gov/neo/rest/v1/neo/browse/
-    @GET("neo/browse")
-    suspend fun loadAsteroidsList(
-        @Query("api_key") apiKey: String
-    ): Response<ListAsteroidsResponse>
+//    @GET("neo/browse")
+//    suspend fun loadAsteroidsList(
+//        @Query("api_key") apiKey: String
+//    ): Response<ListAsteroidsResponse>
 
     //это чисто для проверки:
     //https://api.nasa.gov/neo/rest/v1/neo/3542519?api_key=DEMO_KEY
-    @GET("neo/rest/v1/neo/{asteroidId}")
-    suspend fun loadAsteroidDetails(
-        @Path("asteroid_id") asteroidId: String,
-        @Query("api_key") apiKey: String,
-    ): Response<AsteroidResponse>
+//    @GET("neo/rest/v1/neo/{asteroidId}")
+//    suspend fun loadAsteroidDetails(
+//        @Path("asteroid_id") asteroidId: String,
+//        @Query("api_key") apiKey: String,
+//    ): Response<AsteroidResponse>
 
     //https://api.nasa.gov/neo/rest/v1/feed?start_date=START_DATE&end_date=END_DATE&api_key=API_KEY
     //https://api.nasa.gov/neo/rest/v1/feed?start_date=2021-09-07&end_date=2021-09-08&api_key=DEMO_KEY
     //@RequiresApi(Build.VERSION_CODES.O) - это перечисление известных на данный момент кодов версий SDK (.0 значит "Выпущена публично как Android 8.0 в августе 2017 года." ссылка: https://developer.android.com/reference/android/os/Build.VERSION_CODES
     //это попытка подключить запрос по дате:
-    @GET("neo/rest/v1/feed")
-    suspend fun loadAsteroidsRadar(
-        @Query("start_date") startDate: String = LocalDate.now().toDate().convertDateToString(),
-        @Query("end_date") endDate: String = LocalDate.now().plusDays(6).toDate()
-            .convertDateToString(),
-        @Query("api_key") apiKey: String,
-    ): Response<ListRadarAsteroidsResponse>
+//    @GET("neo/rest/v1/feed")
+//    suspend fun loadAsteroidsRadar(
+//        @Query("start_date") startDate: String = LocalDate.now().toDate().convertDateToString(),
+//        @Query("end_date") endDate: String = LocalDate.now().plusDays(6).toDate()
+//            .convertDateToString(),
+//        @Query("api_key") apiKey: String,
+//    ): Response<ListRadarAsteroidsResponse>
 }
 //------------------------------баба:
 //private val moshi = Moshi.Builder()
@@ -143,4 +158,29 @@ interface Api {
 //    suspend fun getListAsteroids(@Query("api_key") apiKey: String): Response<ListAsteroidsResponse>
 //
 //    // Добавьте другие методы API по мере необходимости
+//}
+
+
+//***PERPLEX***V5
+//package by.vjacheslavkovalenko.asteroidstms.network
+//
+//import by.vjacheslavkovalenko.asteroidstms.network.entity.ListAsteroidsResponse
+//import by.vjacheslavkovalenko.asteroidstms.network.entity.PictureOfDayResponse
+//import retrofit2.Response
+//import retrofit2.http.GET
+//import retrofit2.http.Query
+//
+//interface Api {
+//
+//    @GET("astroids") // Замените на реальный путь к вашему API для получения списка астероидов
+//    suspend fun getListAsteroids(
+//        @Query("api_key") apiKey: String,
+//        @Query("start_date") startDate: String,
+//        @Query("end_date") endDate: String
+//    ): Response<ListAsteroidsResponse>
+//
+//    @GET("picture_of_the_day") // Замените на реальный путь к вашему API для получения картины дня
+//    suspend fun getPictureOfTheDay(
+//        @Query("api_key") apiKey: String
+//    ): Response<PictureOfDayResponse>
 //}

@@ -10,13 +10,16 @@ import by.vjacheslavkovalenko.asteroidstms.database.entity.AsteroidsEntity
 interface AsteroidsDao {
 
     @Insert
-    suspend fun insertList (list: List<AsteroidsEntity>)
+    suspend fun insertList(list: List<AsteroidsEntity>)
 
     @Query("SELECT * FROM Asteroids")
     suspend fun getListAsteroids(): List<AsteroidsEntity>
 
     @Query("SELECT * FROM Asteroids")
     fun pagingSource(): PagingSource<Int, AsteroidsEntity>
+
+    @Query("SELECT * FROM Asteroids WHERE asteroidId = :id")
+    suspend fun getAsteroidById(id: String): AsteroidsEntity?
 }
 
 

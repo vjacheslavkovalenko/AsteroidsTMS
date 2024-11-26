@@ -18,6 +18,29 @@ import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
+//----------
+
+
+//
+//    private fun setupRecyclerView() {
+//        binding?.recyclerView?.layoutManager = LinearLayoutManager(requireContext())
+//        binding?.recyclerView?.adapter = AsteroidsAdapter { asteroid ->
+//            // Обработка клика на астероид (например, переход к DetailsFragment)
+//            // Используйте NavController для навигации с передачей ID астероида.
+//        }
+//    }
+//
+//    private suspend fun setList(pagingData: PagingData<Asteroids>) {
+//        (binding?.recyclerView?.adapter as? AsteroidsAdapter)?.submitData(pagingData)
+//    }
+//
+//    override fun onDestroyView() {
+//        super.onDestroyView()
+//        binding = null // Освобождение привязки при уничтожении представления
+//    }
+//}
+
+
 @AndroidEntryPoint
 class ListFragment : Fragment() {
 
@@ -30,20 +53,30 @@ class ListFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return FragmentListBinding.inflate(layoutInflater, container, false).also {
-            binding = it
-        }.root
+//        return FragmentListBinding.inflate(layoutInflater, container, false).also {
+//            binding = it
+//        }.root
+        binding = FragmentListBinding.inflate(inflater, container, false)
+        return binding?.root ?: throw IllegalStateException("Binding is null")
     }
+
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        // Инициализация RecyclerView
+        setupRecyclerView()
         lifecycleScope.launch {
             viewModel.state.collectLatest { state ->
                 when (state) {
-                    ListFragmentState.Init -> {}
+                    ListFragmentState.Init -> {
+                        // Можно добавить логику для начального состояния, если нужно
+                    }
+
                     is ListFragmentState.ListLoaded -> {
-                        state.flowPagingData.collectLatest {
-                            setList(it)
+// Сбор данных из потока и установка в адаптер
+
+                        state.flowPagingData.collectLatest { pagingData ->
+                            setList(pagingData)
                         }
                     }
                 }
@@ -51,19 +84,36 @@ class ListFragment : Fragment() {
         }
     }
 
-    private suspend fun setList(list: PagingData<Asteroids>) {
-        binding?.recyclerView?.run {
-            if (adapter == null) {
-                layoutManager = LinearLayoutManager(requireContext())
-                adapter = AsteroidsAdapter {
-
-                }
-            }
-            (adapter as? AsteroidsAdapter)?.submitData(list)
+    private fun setupRecyclerView() {
+        binding?.recyclerView?.layoutManager = LinearLayoutManager(requireContext())
+        binding?.recyclerView?.adapter = AsteroidsAdapter { asteroid ->
+            // Обработка клика на астероид (например, переход к DetailsFragment)
+            // Используйте NavController для навигации с передачей ID астероида.
         }
+    }
 
+    private suspend fun setList(pagingData: PagingData<Asteroids>) {
+        (binding?.recyclerView?.adapter as? AsteroidsAdapter)?.submitData(pagingData)
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        binding = null // Освобождение привязки при уничтожении представления
     }
 }
+//                        private suspend fun setList(list: PagingData<Asteroids>) {
+//                            binding?.recyclerView?.run {
+//                                if (adapter == null) {
+//                                    layoutManager = LinearLayoutManager(requireContext())
+//                                    adapter = AsteroidsAdapter {
+//
+//                                    }
+//                                }
+//                                (adapter as? AsteroidsAdapter)?.submitData(list)
+//                            }
+//
+//                        }
+//                    }
 
 //ии написал:
 //package by.vjacheslavkovalenko.asteroidstms.ui.list
@@ -141,7 +191,6 @@ class ListFragment : Fragment() {
 //}
 
 
-
 //***PERPLEX***
 //
 //package by.vjacheslavkovalenko.asteroidstms.ui.list
@@ -214,7 +263,6 @@ class ListFragment : Fragment() {
 //          _binding = null // Освобождение привязки при уничтожении представления
 //      }
 //}
-
 
 
 //***PERPLEX***V3---попросил заменить private val binding get() = _binding!!

@@ -2,8 +2,14 @@ package by.vjacheslavkovalenko.asteroidstms.ui
 //***PERPLEX***V4***XML
 //package by.vjacheslavkovalenko.asteroidstms.ui.main
 
+import android.os.Bundle
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import by.vjacheslavkovalenko.asteroidstms.R
+import by.vjacheslavkovalenko.asteroidstms.databinding.FragmentMainBinding
 
 class MainFragment : Fragment() {
 
