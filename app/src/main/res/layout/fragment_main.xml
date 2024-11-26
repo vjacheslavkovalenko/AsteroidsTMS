@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?><!--//***PERPLEX***V4***XML-->
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp">
+
+    <ImageView
+        android:id="@+id/imageViewPictureOfDay"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:contentDescription="@string/picture_of_day"
+        android:scaleType="centerCrop"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textViewTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintTop_toBottomOf="@id/imageViewPictureOfDay" />
+
+    <Button
+        android:id="@+id/buttonAboutApp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="О приложении"
+        app:layout_constraintTop_toBottomOf="@id/textViewTitle" />
+
+    <Button
+        android:id="@+id/buttonRadarAsteroids"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Радар астероидов"
+        app:layout_constraintTop_toBottomOf="@id/buttonAboutApp" />
+
+    <Button
+        android:id="@+id/buttonWhatAreAsteroids"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Что такое астероиды"
+        app:layout_constraintTop_toBottomOf="@id/buttonRadarAsteroids" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
