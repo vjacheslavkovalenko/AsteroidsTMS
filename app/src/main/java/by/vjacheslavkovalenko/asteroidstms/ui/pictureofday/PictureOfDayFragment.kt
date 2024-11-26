@@ -6,8 +6,14 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import by.vjacheslavkovalenko.asteroidstms.databinding.FragmentPictureOfDayBinding
+import by.vjacheslavkovalenko.asteroidstms.model.PictureOfDay
+import by.vjacheslavkovalenko.asteroidstms.ui.pictureofday.domain.PictureFragmentState
+import com.bumptech.glide.Glide
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class PictureOfDayFragment : Fragment() {
@@ -20,9 +26,11 @@ class PictureOfDayFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return FragmentPictureOfDayBinding.inflate(layoutInflater, container, false).also {
-            binding = it
-        }.root
+//        return FragmentPictureOfDayBinding.inflate(layoutInflater, container, false).also {
+//            binding = it
+//        }.root
+        binding = FragmentPictureOfDayBinding.inflate(inflater, container, false)
+        return binding?.root ?: throw IllegalStateException("Binding is null")
 //        binding = FragmentPictureOfDayBinding.inflate(inflater)
 //        return binding?.root
     }
@@ -43,15 +51,52 @@ class PictureOfDayFragment : Fragment() {
 //        }
 //    }
 
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewModel.image.observe(viewLifecycleOwner) {
-            binding?.image?.loadUrl(it.message)
-            binding?.errorText?.visibility = View.GONE
-            binding?.tryAgainButton?.visibility = View.GONE
-            binding?.image?.visibility = View.VISIBLE
+        lifecycleScope.launch {
+            viewModel.state.collectLatest { state ->
+                when (state) {
+                    is PictureFragmentState.Init -> {}
+                    is PictureFragmentState.PictureLoaded -> {
+                        displayPicture(state.picture)
+                    }
+
+                    is PictureFragmentState.Error -> {
+                        showError(state.message)
+                    }
+                }
+            }
         }
+
+        // Загружаем картину дня при создании фрагмента
+        viewModel.loadPicture()
+    }
+
+
+    private fun displayPicture(picture: PictureOfDay) {
+        binding?.imageViewPictureOfDayDetail?.let { imageView ->
+            Glide.with(this).load(picture.url)
+                .into(imageView) // Используйте библиотеку Glide для загрузки изображений.
+        }
+        binding?.textViewDescription?.text = picture.explanation
+    }
+
+    private fun showError(message: String) {
+        binding?.errorTextView?.text = message // Предполагается наличие TextView для ошибок.
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        binding = null // Освобождение привязки при уничтожении представления
+    }
+}
+
+//        viewModel.image.observe(viewLifecycleOwner) {
+//            binding?.image?.loadUrl(it.message)
+//            binding?.errorText?.visibility = View.GONE
+//            binding?.tryAgainButton?.visibility = View.GONE
+//            binding?.image?.visibility = View.VISIBLE
+//        }
 //        viewModel.showError = {
 //            binding?.errorText?.visibility = View.VISIBLE
 //            binding?.tryAgainButton?.visibility = View.VISIBLE
@@ -60,8 +105,8 @@ class PictureOfDayFragment : Fragment() {
 //        binding?.tryAgainButton?.setOnClickListener {
 //            viewModel.loadDogImage()
 //        }
-        viewModel.loadDogImage()
-    }
+//        viewModel.loadDogImage()
+
 //----------------------моё--class ListFragment : Fragment() {-----это для списка астероидов-------------
 //private var binding: FragmentListBinding? = null
 //
@@ -107,7 +152,7 @@ class PictureOfDayFragment : Fragment() {
 //    }
 
 //-----------------------конец моё---------------------
-    //
+//
 //    private var binding: FragmentDogImageBinding? = null
 //
 //    private val viewModel: DogImageViewModel by viewModels()
@@ -139,9 +184,7 @@ class PictureOfDayFragment : Fragment() {
 //        }
 //        viewModel.loadDogImage()
 //    }
-    //
-}
-
+//
 
 
 //***PERPLEX***V2

@@ -21,10 +21,11 @@ data class ListAsteroidsResponse(//запрос на все астероиды (
     @SerializedName("total_elements")
     val totalElements: Int,
     @SerializedName("near_earth_objects")
-    val allAsteroids: List<AsteroidResponse>,
+//    val allAsteroids: List<AsteroidResponse>, //ии предложил назвать nearEarthObjects
+    val nearEarthObjects: List<AsteroidResponse>,
     // проверяю, сработает ли (так как возникает ошибка в "AsteroidsListRemoteMediator"
     @SerializedName("name")
-    val name: String
+    val name: String? = null
 
     //val asteroidParameters : List<AsteroidResponse>
 

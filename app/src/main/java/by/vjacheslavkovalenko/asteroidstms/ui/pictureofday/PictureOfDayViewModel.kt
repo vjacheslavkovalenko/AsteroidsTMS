@@ -4,24 +4,38 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.paging.cachedIn
 import by.vjacheslavkovalenko.asteroidstms.domain.LoadAsteroidsListUseCase
+import by.vjacheslavkovalenko.asteroidstms.domain.LoadPictureOfDayUseCase
 import by.vjacheslavkovalenko.asteroidstms.ui.list.domain.ListFragmentState
+import by.vjacheslavkovalenko.asteroidstms.ui.pictureofday.domain.PictureFragmentState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+ import kotlinx.coroutines.flow.MutableStateFlow
+ import kotlinx.coroutines.flow.StateFlow
 import javax.inject.Inject
 
 @HiltViewModel
 class PictureOfDayViewModel @Inject constructor(
-    private val loadAsteroidsListUseCase: LoadAsteroidsListUseCase
+    private val loadPictureOfDayUseCase: LoadPictureOfDayUseCase
     ) : ViewModel() {
 
-            fun LoadData() {
-            viewModelScope.launch(Dispatchers.IO) {
-                state.emit(
-                    ListFragmentState.ListLoaded(
-                        loadAsteroidsListUseCase.loadData().cachedIn(viewModelScope)))
+    private val stateFlow = MutableStateFlow<PictureFragmentState>(PictureFragmentState.Init)
+    val state: StateFlow<PictureFragmentState> get() = stateFlow
+
+
+    // Функция для загрузки картины дня
+    fun loadPicture() {
+        viewModelScope.launch {
+            try {
+                val result = loadPictureOfDayUseCase.loadPictureOfDay("title") // Укажите нужный заголовок или используйте API для получения заголовка.
+                stateFlow.emit(PictureFragmentState.PictureLoaded(result))
+            } catch (e: Exception) {
+                stateFlow.emit(PictureFragmentState.Error(e.message ?: "Unknown error"))
             }
         }
+    }
+}
+
     //@HiltViewModel
 //class DogImageViewModel @Inject constructor(
 //    private val repository: DogRepository
@@ -56,7 +70,7 @@ class PictureOfDayViewModel @Inject constructor(
 //            }
 //        }
 
-}
+
 
 //---------27 урок---------
 
@@ -147,3 +161,6 @@ class PictureOfDayViewModel @Inject constructor(
 //          }
 //      }
 //}
+
+
+

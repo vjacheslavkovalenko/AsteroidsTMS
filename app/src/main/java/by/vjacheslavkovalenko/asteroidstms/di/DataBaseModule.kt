@@ -20,7 +20,10 @@ object DataBaseModule {
     @Provides
     @Singleton
     fun provideAsteroidsDataBase(@ApplicationContext context: Context): AsteroidsDataBase {
-        return Room.databaseBuilder(context, AsteroidsDataBase::class.java, "dataBase").build()
+//        return Room.databaseBuilder(context, AsteroidsDataBase::class.java, "dataBase").build()
+        return Room.databaseBuilder(context, AsteroidsDataBase::class.java, "asteroids_database")
+            .fallbackToDestructiveMigration()
+            .build()
     }
 
     @Provides
@@ -29,17 +32,17 @@ object DataBaseModule {
         return dataBase.getAsteroidsDao()
     }
 
-    @Provides
-    @Singleton
-    fun provideAsteroidDetailsDao(dataBase: AsteroidsDataBase): AsteroidDetailsDao {
-        return dataBase.getAsteroidDetailsDao()
-    }
+//    @Provides
+//    @Singleton
+//    fun provideAsteroidDetailsDao(dataBase: AsteroidsDataBase): AsteroidDetailsDao {
+//        return dataBase.getAsteroidDetailsDao()
+//    }
 
-    @Provides
-    @Singleton
-    fun providePictureOfDayDao(dataBase: AsteroidsDataBase): PictureOfDayDao {
-        return dataBase.getPictureOfDayDao()
-    }
+//    @Provides
+//    @Singleton
+//    fun providePictureOfDayDao(dataBase: AsteroidsDataBase): PictureOfDayDao {
+//        return dataBase.getPictureOfDayDao()
+//    }
 }
 
 
@@ -89,8 +92,6 @@ object DataBaseModule {
 //        return database.getPictureOfDayDao()
 //    }
 //}
-
-
 
 
 //***PERPLEX***

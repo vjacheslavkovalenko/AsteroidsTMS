@@ -16,10 +16,9 @@ data class AsteroidResponse(
     @SerializedName("name")
     val nameAsteroid: String,
     @SerializedName("estimated_diameter")
-    val estimatedDiameter: EstimatedDiameter
-   // val is_potentially_hazardous_asteroid: Boolean,
-
-
+    val estimatedDiameter: EstimatedDiameter,
+    @SerializedName("is_potentially_hazardous_asteroid")
+    val isPotentiallyHazardous: Boolean
 )
 
 //data class ListAsteroidsResponse( //запрос по дате
@@ -44,43 +43,6 @@ data class AsteroidResponse(
 //    val estimated_diameter_min: Double
 //)
 
-
-
-//ии написал:
-//package by.vjacheslavkovalenko.asteroidstms.network.entity
-//
-//import com.google.gson.annotations.SerializedName
-//
-//// Характеристики (параметры) объекта около Земли
-//data class AsteroidResponse(
-//    @SerializedName("id")
-//    val asteroidId: String,
-//
-//    @SerializedName("name")
-//    val nameAsteroid: String,
-//
-//    @SerializedName("estimated_diameter")
-//    val estimatedDiameter: EstimatedDiameter,
-//
-//    // Добавьте другие поля, если необходимо
-//    // Например, относительная скорость или дистанция
-//    @SerializedName("is_potentially_hazardous_asteroid")
-//    val isPotentiallyHazardous: Boolean? = null // Опционально, если нужно
-//)
-//
-//// Класс для представления оценочного диаметра астероида
-//data class EstimatedDiameter(
-//    @SerializedName("kilometers")
-//    val kilometers: DiameterDetails
-//)
-//
-//data class DiameterDetails(
-//    @SerializedName("estimated_diameter_min")
-//    val min: Double,
-//
-//    @SerializedName("estimated_diameter_max")
-//    val max: Double
-//)
 
 //***PERPLEX***
 //

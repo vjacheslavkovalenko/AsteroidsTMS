@@ -6,7 +6,8 @@ import com.google.gson.annotations.SerializedName
 data class EstimatedDiameter(
 //    val feet: Feet,
     @SerializedName("kilometers")
-    val kilometers: List<Kilometers>
+    val kilometers: KilometersDiameter
+//    val kilometers: List<Kilometers>
 //    val meters: Meters,
 //    val miles: Miles
 )

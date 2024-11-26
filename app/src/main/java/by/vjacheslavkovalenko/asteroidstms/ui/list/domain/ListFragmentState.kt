@@ -7,13 +7,16 @@ import kotlinx.coroutines.flow.Flow
 
 sealed class ListFragmentState {
 
-    data object Init : ListFragmentState()
+    data object Init : ListFragmentState() // Начальное состояние
+
+    data object Loading : ListFragmentState() // Состояние загрузки
 
     data class ListLoaded(
         val flowPagingData: Flow<PagingData<Asteroids>>
     ) : ListFragmentState()
-}
 
+    data class Error(val message: String) : ListFragmentState() // Состояние ошибки
+}
 
 
 //ии написал:
