@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">AsteroidsTMS</string>
     <string name="picture_of_day_detail">Picture Of the Day</string>
+    <string name="text_about_app">О приложении</string>
 </resources>
