@@ -1,6 +1,4 @@
 package by.vjacheslavkovalenko.asteroidstms.ui
-//***PERPLEX***V4***XML
-//package by.vjacheslavkovalenko.asteroidstms.ui.main
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -35,39 +33,25 @@ class MainFragment : Fragment() {
             findNavController().navigate(R.id.action_mainFragment_to_listFragment)
         }
 
+        //пробую по клику на фото открыть новое окно (с ним и описанием)
+        binding?.imageViewPictureOfDay?.setOnClickListener {
+            findNavController().navigate(R.id.action_mainFragment_to_pictureOfDayFragment)
+        }
+
+
+
+
         binding?.buttonWhatAreAsteroids?.setOnClickListener {
             // Здесь можно добавить логику для отображения информации о астероидах.
         }
 
-        // Загрузите картину дня через ViewModel или API и установите в ImageView и TextView.
+        // Загрузить картину дня через ViewModel или API и установить в ImageView и TextView.
         // Например:
         // loadPictureOfDay()
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
-        binding = null // Освобождение привязки при уничтожении представления
+        binding = null
     }
 }
-
-//
-//class MainFragment : Fragment() {
-//
-//   // ... ваш код ...
-//
-//   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-//       super.onViewCreated(view, savedInstanceState)
-//
-//       binding?.buttonAboutApp?.setOnClickListener {
-//           findNavController().navigate(R.id.action_mainFragment_to_aboutAppFragment)
-//       }
-//
-//       binding?.buttonRadarAsteroids?.setOnClickListener {
-//           findNavController().navigate(R.id.action_mainFragment_to_asteroidsRadarFragment)
-//       }
-//
-//       binding?.buttonWhatAreAsteroids?.setOnClickListener {
-//           findNavController().navigate(R.id.action_mainFragment_to_pictureOfDayFragment)
-//       }
-//   }
-//}

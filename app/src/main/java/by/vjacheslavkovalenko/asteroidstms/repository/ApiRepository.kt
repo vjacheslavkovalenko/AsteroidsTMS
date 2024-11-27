@@ -20,7 +20,7 @@ interface ApiRepository {
     ): Flow<List<Asteroids>>
 
     /**
-     * Получение картины дня.
+     * Получение картинки дня.
      *
      * @param apiKey Ключ API для доступа к NASA API.
      * @return Flow, содержащий объект PictureOfDay.

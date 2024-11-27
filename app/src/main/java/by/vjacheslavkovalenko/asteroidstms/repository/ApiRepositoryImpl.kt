@@ -40,7 +40,7 @@ class ApiRepositoryImpl @Inject constructor(
     }
 
     override suspend fun getPictureOfDay(apiKey: String): Flow<PictureOfDay> = flow {
-        // Выполняем запрос к API для получения картины дня
+        // Выполняем запрос к API для получения картинки дня
         val response: Response<PictureOfDayResponse> = api.getPictureOfDay(apiKey)
 
         if (response.isSuccessful) {

@@ -9,8 +9,7 @@ import by.vjacheslavkovalenko.asteroidstms.database.entity.PictureOfDayEntity
 interface PictureOfDayDao {
 
     @Insert
-//    suspend fun insertPictureOfDay(pictureOfDay: PictureOfDayEntity)
-    suspend fun insertPictureOfDay(picture: PictureOfDayEntity)
+    suspend fun insertPictureOfDay(pictureOfDay: PictureOfDayEntity)
 
     @Query("SELECT * FROM PictureOfDay LIMIT 1")
     suspend fun getPictureOfDay(): PictureOfDayEntity?

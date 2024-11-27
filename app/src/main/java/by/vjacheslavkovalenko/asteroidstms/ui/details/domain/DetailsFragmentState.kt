@@ -17,3 +17,4 @@ sealed class DetailsFragmentState {
     ) : DetailsFragmentState() // Ошибка при загрузке данных
 
 }
+//data class PictureLoaded(val picture: PictureOfDayEntity) : PictureFragmentState()

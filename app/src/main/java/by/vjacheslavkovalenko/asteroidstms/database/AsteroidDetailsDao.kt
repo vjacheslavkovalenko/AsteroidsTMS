@@ -9,7 +9,7 @@ import by.vjacheslavkovalenko.asteroidstms.database.entity.AsteroidDetailsEntity
 interface AsteroidDetailsDao {
 
     @Insert
-    suspend fun insertAsteroidDetails (asteroidDetails: AsteroidDetailsEntity)
+    suspend fun insertAsteroidDetails(asteroidDetails: AsteroidDetailsEntity)
 
     @Query("SELECT * FROM AsteroidDetails WHERE asteroidId == :asteroidId LIMIT 1")
     suspend fun getAsteroidDetailsById(asteroidId: String): AsteroidDetailsEntity

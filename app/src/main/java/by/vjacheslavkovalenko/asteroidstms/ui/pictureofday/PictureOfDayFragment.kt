@@ -7,8 +7,8 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import by.vjacheslavkovalenko.asteroidstms.database.entity.PictureOfDayEntity
 import by.vjacheslavkovalenko.asteroidstms.databinding.FragmentPictureOfDayBinding
-import by.vjacheslavkovalenko.asteroidstms.model.PictureOfDay
 import by.vjacheslavkovalenko.asteroidstms.ui.pictureofday.domain.PictureFragmentState
 import com.bumptech.glide.Glide
 import dagger.hilt.android.AndroidEntryPoint
@@ -51,6 +51,7 @@ class PictureOfDayFragment : Fragment() {
 //        }
 //    }
 
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         lifecycleScope.launch {
@@ -68,11 +69,12 @@ class PictureOfDayFragment : Fragment() {
             }
         }
 
-        // Загружаем картину дня при создании фрагмента
+        // Загружаем картинку дня при создании фрагмента
         viewModel.loadPicture()
     }
 
-    private fun displayPicture(picture: PictureOfDay) {
+    private fun displayPicture(picture: PictureOfDayEntity) {
+        //       Glide.with(this).load(picture.url).into(binding!!.imageViewPictureOfDayDetail)
         binding?.imageViewPictureOfDayDetail?.let { imageView ->
             Glide.with(this).load(picture.url)
                 .into(imageView) //  библиотекa Glide для загрузки изображений
@@ -86,6 +88,6 @@ class PictureOfDayFragment : Fragment() {
 
     override fun onDestroyView() {
         super.onDestroyView()
-        binding = null // Освобождение привязки при уничтожении представления
+        binding = null
     }
 }
