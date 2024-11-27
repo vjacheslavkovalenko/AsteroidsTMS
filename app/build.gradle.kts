@@ -1,7 +1,9 @@
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
-    alias(libs.plugins.hilt.android)
+//    alias(libs.plugins.hilt.android)
+//    alias(libs.plugins.kap)
+//    id "kotlin-kapt"
 }
 
 android {
@@ -39,6 +41,25 @@ android {
     buildFeatures {
         viewBinding = true
     }
+
+//    configurations.implementation{
+//        exclude(group = "com.intellij", module = "annotations")
+//    }
+
+    configurations {
+        create("cleanedAnnotations")
+        implementation {
+            exclude(group = "org.jetbrains", module = "annotations")
+        }
+    }
+
+    packaging {
+        resources {
+            excludes += "/META-INF/{AL2.0,LGPL2.1}"
+            excludes += "/META-INF/gradle/incremental.annotation.processors"
+
+        }
+    }
 }
 
 dependencies {
@@ -70,7 +91,7 @@ dependencies {
     implementation(libs.room.paging)
     implementation(libs.gson)
     implementation(libs.logging.interceptor)
-    implementation(libs.hilt.ksp)
+//    implementation(libs.hilt.ksp)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
