@@ -6,17 +6,33 @@ import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import by.vjacheslavkovalenko.asteroidstms.databinding.ItemAsteroidsBinding
 import by.vjacheslavkovalenko.asteroidstms.model.Asteroids
+import androidx.recyclerview.widget.ListAdapter
+import androidx.recyclerview.widget.RecyclerView
+
+//class AsteroidsAdapter(
+//    private val onClick: (asteroids: Asteroids) -> Unit
+//) : PagingDataAdapter<Asteroids, AsteroidsViewHolder>(
+//    object : DiffUtil.ItemCallback<Asteroids>() {
+//        override fun areItemsTheSame(oldItem: Asteroids, newItem: Asteroids): Boolean {
+//            return oldItem == newItem
+//        }
+//
+//        override fun areContentsTheSame(oldItem: Asteroids, newItem: Asteroids): Boolean {
+//            return oldItem.asteroidId == newItem.asteroidId
+//        }
+//    }
+//) {
 
 class AsteroidsAdapter(
-    private val onClick: (asteroids: Asteroids) -> Unit
+    private val onClick: (Asteroids) -> Unit // Обработчик клика на астероид
 ) : PagingDataAdapter<Asteroids, AsteroidsViewHolder>(
     object : DiffUtil.ItemCallback<Asteroids>() {
         override fun areItemsTheSame(oldItem: Asteroids, newItem: Asteroids): Boolean {
-            return oldItem == newItem
+            return oldItem.asteroidId == newItem.asteroidId // Сравнение по уникальному идентификатору.
         }
 
         override fun areContentsTheSame(oldItem: Asteroids, newItem: Asteroids): Boolean {
-            return oldItem.asteroidId == newItem.asteroidId
+            return oldItem == newItem // Сравнение содержимого объектов астероидов.
         }
     }
 ) {
@@ -27,11 +43,21 @@ class AsteroidsAdapter(
         )
     }
 
+//    override fun onBindViewHolder(holder: AsteroidsViewHolder, position: Int) {
+//        getItem(position)?.let { asteroids: Asteroids ->
+//            holder.bind(asteroids)
+//            holder.itemView.setOnClickListener {
+//                onClick(asteroids)
+//            }
+//        }
+//    }
+//}
+
     override fun onBindViewHolder(holder: AsteroidsViewHolder, position: Int) {
-        getItem(position)?.let { asteroids: Asteroids ->
-            holder.bind(asteroids)
+        getItem(position)?.let { asteroid ->
+            holder.bind(asteroid) // Привязка данных к ViewHolder.
             holder.itemView.setOnClickListener {
-                onClick(asteroids)
+                onClick(asteroid) // Вызываем обработчик клика.
             }
         }
     }

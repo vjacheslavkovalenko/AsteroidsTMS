@@ -6,6 +6,7 @@ import androidx.paging.PagingConfig
 import androidx.paging.PagingData
 import androidx.paging.map
 import by.vjacheslavkovalenko.asteroidstms.database.AsteroidsDao
+import by.vjacheslavkovalenko.asteroidstms.database.entity.AsteroidsEntity
 import by.vjacheslavkovalenko.asteroidstms.mapper.AsteroidsMapper
 import by.vjacheslavkovalenko.asteroidstms.repository.AsteroidsListRemoteMediator
 import by.vjacheslavkovalenko.asteroidstms.repository.CacheRepository
@@ -21,8 +22,8 @@ class LoadAsteroidsListUseCase @Inject constructor(
 ) {
 //    suspend fun loadData() = cacheRepository.getListAsteroids()
 
-    // Метод возвращает Flow<PagingData<Asteroids>>
-    fun loadData(): Flow<PagingData<Asteroids>> {
+    // Метод возвращает Flow<PagingData<Asteroids>>  //поменять, если не сработает, на безэнтити
+    fun loadData(): Flow<PagingData<AsteroidsEntity>> {
         return cacheRepository.getPagedListAsteroids()
     }
 }

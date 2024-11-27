@@ -30,4 +30,16 @@ object DataBaseModule {
     fun provideAsteroidsDao(dataBase: AsteroidsDataBase): AsteroidsDao {
         return dataBase.getAsteroidsDao()
     }
+
+    @Provides
+    @Singleton
+    fun provideAsteroidDetailsDao(dataBase: AsteroidsDataBase): AsteroidDetailsDao {
+        return dataBase.getAsteroidDetailsDao()
+    }
+
+    @Provides
+    @Singleton
+    fun providePictureDao(dataBase: AsteroidsDataBase): PictureOfDayDao {
+        return dataBase.getPictureOfDayDao()
+    }
 }

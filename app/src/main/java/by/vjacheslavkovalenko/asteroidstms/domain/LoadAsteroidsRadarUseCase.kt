@@ -8,7 +8,6 @@ import retrofit2.Response
 import java.time.LocalDate
 import javax.inject.Inject
 
-
 class LoadAsteroidsRadarUseCase @Inject constructor(
     private val apiRepository: ApiRepository
 ) {

@@ -7,11 +7,19 @@
     <fragment
         android:id="@+id/aboutAppFragment"
         android:name="by.vjacheslavkovalenko.asteroidstms.ui.AboutAppFragment"
-        android:label="AboutAppFragment" />
+        android:label="AboutAppFragment" >
+        <action
+            android:id="@+id/action_aboutAppFragment_to_mainFragment"
+            app:destination="@id/mainFragment" />
+    </fragment>
     <fragment
         android:id="@+id/pictureOfDayFragment"
         android:name="by.vjacheslavkovalenko.asteroidstms.ui.pictureofday.PictureOfDayFragment"
-        android:label="PictureOfDayFragment" />
+        android:label="PictureOfDayFragment" >
+        <action
+            android:id="@+id/action_pictureOfDayFragment_to_mainFragment"
+            app:destination="@id/mainFragment" />
+    </fragment>
     <fragment
         android:id="@+id/mainFragment"
         android:name="by.vjacheslavkovalenko.asteroidstms.ui.MainFragment"
@@ -32,11 +40,20 @@
         android:label="ListFragment" >
         <action
             android:id="@+id/action_listFragment_to_detailsFragment"
-            app:destination="@id/detailsFragment" />
+            app:destination="@id/detailsFragment"
+            app:argType="string"
+            app:argumentName="asteroidId"/>
+        <action
+            android:id="@+id/action_listFragment_to_mainFragment"
+            app:destination="@id/mainFragment" />
     </fragment>
     <fragment
         android:id="@+id/detailsFragment"
         android:name="by.vjacheslavkovalenko.asteroidstms.ui.details.DetailsFragment"
-        android:label="DetailsFragment" />
+        android:label="DetailsFragment" >
+        <action
+            android:id="@+id/action_detailsFragment_to_listFragment"
+            app:destination="@id/listFragment" />
+    </fragment>
 
 </navigation>
