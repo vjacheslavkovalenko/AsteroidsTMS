@@ -1,8 +1,11 @@
 package by.vjacheslavkovalenko.asteroidstms.ui
-//***PERPLEX***V4***XML
-//package by.vjacheslavkovalenko.asteroidstms.ui.aboutapp
 
+import android.os.Bundle
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import by.vjacheslavkovalenko.asteroidstms.databinding.FragmentAboutAppBinding
 
 class AboutAppFragment : Fragment() {
 
@@ -26,6 +29,6 @@ class AboutAppFragment : Fragment() {
 
     override fun onDestroyView() {
         super.onDestroyView()
-        binding = null // Освобождение привязки при уничтожении представления
+        binding = null
     }
 }
