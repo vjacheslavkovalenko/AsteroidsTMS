@@ -19,6 +19,7 @@ class AsteroidsViewHolder(
 ) : RecyclerView.ViewHolder(binding.root) {
 
     fun bind(asteroids: Asteroids) {
-        binding.nameTextView.text = asteroids.nameAsteroid // Пример отображения имени астероида
+        binding.nameTextViewNameAsteroid .text = asteroids.nameAsteroid // Пример отображения имени астероида
+        binding.nameTextViewAsteroidId.text = asteroids.asteroidId // Пример отображения имени астероида
     }
 }

@@ -2,6 +2,10 @@
 plugins {
     alias(libs.plugins.android.application) apply false
     alias(libs.plugins.kotlin.android) apply false
-    alias(libs.plugins.hilt.android) apply false
-    alias(libs.plugins.navigation.safeargs.kotlin) apply false
 }
+
+//plugins {
+//    id("com.android.application") version "8.2.1" apply false
+//    id("org.jetbrains.kotlin.android") version "1.9.22" apply false
+//    id ("com.google.dagger.hilt.android") version "2.44" apply false
+//}
