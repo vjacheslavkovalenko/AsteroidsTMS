@@ -9,7 +9,7 @@ data class AsteroidsEntity(
     @PrimaryKey
     @ColumnInfo("asteroidId")
     val asteroidId: String,
-    val name: String,
+    val nameAsteroid: String,
     val estimatedDiameterMin: Double,
     val estimatedDiameterMax: Double,
     val isPotentiallyHazardous: Boolean

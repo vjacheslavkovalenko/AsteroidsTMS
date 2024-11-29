@@ -17,7 +17,7 @@ dagger = "2.52"
 javax-inject = "1"
 lifecycle = "2.8.7"
 # Annotations procesing
-ksp = "2.0.20-1.0.24"
+ksp = "2.0.21-1.0.27"
 # Firebase Services
 # https://firebase.google.com/support/release-notes/android
 firebase-crashlytics-gradle = "3.0.2"
@@ -55,6 +55,30 @@ navigation-dynamicFeatures-runtime = { module = "androidx.navigation:navigation-
 navigation-safeArgs-generator = { module = "androidx.navigation:navigation-safe-args-generator", version.ref = "navigation" }
 navigation-safeArgs-gradlePlugin = { module = "androidx.navigation:navigation-safe-args-gradle-plugin", version.ref = "navigation" }
 navigation-testing = { module = "androidx.navigation:navigation-testing", version.ref = "navigation" }
+
+room = { module = "androidx.room:room-ktx", version.ref = "room" }
+room-runtime = {group = "androidx.room", name = "room-runtime", version.ref = "room"}
+#room-common = { module = "androidx.room:room-common", version.ref = "room" }
+room-compiler = { module = "androidx.room:room-compiler", version.ref = "room" }
+#room-compiler-processing = { module = "androidx.room:room-compiler-processing", version.ref = "room" }
+#room-compiler-processing-testing = { module = "androidx.room:room-compiler-processing-testing", version.ref = "room" }
+#room-gradlePlugin = { module = "androidx.room:room-gradle-plugin", version.ref = "room" }
+#room-paging-rxjava2 = { module = "androidx.room:room-paging-rxjava2", version.ref = "room" }
+#room-paging-rxjava3 = { module = "androidx.room:room-paging-rxjava3", version.ref = "room" }
+#room-runtime = { module = "androidx.room:room-runtime", version.ref = "room" }
+#room-rxjava2 = { module = "androidx.room:room-rxjava2", version.ref = "room" }
+#room-rxjava3 = { module = "androidx.room:room-rxjava3", version.ref = "room" }
+
+#ksp-ksp = {group = "androidx.room", name = "room-compiler", version.ref = "room"}
+
+#// If this project uses any Kotlin source, use Kotlin Symbol Processing (KSP)
+#// See Add the KSP plugin to your project
+#ksp("androidx.room:room-compiler:2.6.1")
+#
+#// If this project only uses Java source, use the Java annotationProcessor
+#annotationProcessor("androidx.room:room-compiler:$room_version")
+
+
 
 # DI
 dagger = { module = "com.google.dagger:dagger", version.ref = "dagger" }
@@ -96,7 +120,7 @@ navigation-safeargs = { id = "androidx.navigation.safeargs", version.ref = "navi
 #kotlin-parcelize = { id = "org.jetbrains.kotlin.plugin.parcelize", version.ref = "kotlin" }
 #kotlin-scripting = { id = "org.jetbrains.kotlin.plugin.scripting", version.ref = "kotlin" }
 #navigation-safeargs-kotlin = { id = "androidx.navigation.safeargs.kotlin", version.ref = "navigation" }
-#room = { id = "androidx.room", version.ref = "room" }
+room = { id = "androidx.room", version.ref = "room" }
 
 firebase-crashlitycs = { id = "com.google.firebase.crashlytics", version.ref = "firebase-crashlytics-gradle" }
 gms-googleServices = { id = "com.google.gms.google-services", version.ref = "gms-googleServices" }

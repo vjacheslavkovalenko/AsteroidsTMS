@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+
+    <string name="app_name">Приложение "Астероиды"</string>
+    <string name="loading">Загрузка...</string>
+    <string name="error_message">Произошла ошибка: %1$s</string>
+    <string name="asteroid_details">Детали Астероида</string>
+    <string name="diameter">Диаметр: %1$s - %2$s км</string>
+    <string name="hazardous">Потенциально Опасный</string>
+    <string name="not_hazardous">Не Опасный</string>
+
+
+</resources>

@@ -2,4 +2,14 @@
     <string name="app_name">AsteroidsTMS</string>
     <string name="picture_of_day_detail">Picture Of the Day</string>
     <string name="text_about_app">О приложении</string>
+
+
+    <string name="loading">Loading...</string>
+    <string name="error_message">An error occurred: %1$s</string>
+    <string name="asteroid_details">Asteroid Details</string>
+    <string name="diameter">Diameter: %1$s - %2$s km</string>
+    <string name="hazardous">Potentially Hazardous</string>
+    <string name="not_hazardous">Not Hazardous</string>
+
+
 </resources>

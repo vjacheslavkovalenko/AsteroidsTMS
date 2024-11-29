@@ -1,58 +1,5 @@
-by.vjacheslavkovalenko.asteroidstms
-│
-├── database
-│   ├── AsteroidsDao.kt
-│   ├── AsteroidsDataBase.kt
-│   ├── Converters.kt
-│   └── entity
-│       ├── AsteroidsEntity.kt
-│       └── AsteroidDetailsEntity.kt
-│
-├── di
-│   ├── DataBaseModule.kt
-│   └── RepositoryModule.kt
-│
-├── domain
-│   ├── LoadAsteroidDetailsUseCase.kt
-│   └── LoadAsteroidsListUseCase.kt
-│
-├── model
-│   └── Asteroids.kt
-│
-├── network
-│   ├── Api.kt
-│   ├── entity
-│   │   ├── AsteroidResponse.kt
-│   │   ├── ListAsteroidsResponse.kt
-│   │   └── ListRadarAsteroidsResponse.kt
-│   └── repository
-│       └── ApiRepository.kt
-│       └── ApiRepositoryImpl.kt
-│
-├── repository
-│   ├── CacheRepository.kt
-│   └── CacheRepositoryImpl.kt
-│
-├── ui
-│   ├── details
-│   │   ├── DetailsFragment.kt
-│   │   └── DetailsViewModel.kt
-│   │
-│   └── list
-│       ├── ListFragment.kt
-│       ├── ListViewModel.kt
-│       └── adapter
-│           ├── AsteroidsAdapter.kt
-│           └── AsteroidsViewHolder.kt
-└── utils
-    └── DateUtils.kt
 
 
-
-
-    //подправил
-    //
-    //
 
 by.vjacheslavkovalenko.asteroidstms
 │

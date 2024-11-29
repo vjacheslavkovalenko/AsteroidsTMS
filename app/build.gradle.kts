@@ -5,9 +5,9 @@ plugins {
     alias(libs.plugins.kotlin.serialization)
     alias(libs.plugins.ksp)
     alias(libs.plugins.navigation.safeargs)
+    alias(libs.plugins.room)
 //    alias(libs.plugins.navigation.safeargs.kotlin)
 //    alias(libs.plugins.android.library)
-//    alias(libs.plugins.kotlin.kapt)
 }
 
 android {
@@ -45,6 +45,10 @@ android {
     buildFeatures {
         viewBinding = true
     }
+
+    room {
+        schemaDirectory("$projectDir/schemas")
+    }
 }
 
 dependencies {
@@ -69,6 +73,11 @@ dependencies {
     implementation(libs.gson)
     implementation(libs.glide)
     implementation(libs.paging)
+    implementation(libs.room)
+    implementation(libs.room.runtime)
+    implementation(libs.room.paging)
+    annotationProcessor(libs.room.compiler)
+    ksp(libs.room.compiler)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)

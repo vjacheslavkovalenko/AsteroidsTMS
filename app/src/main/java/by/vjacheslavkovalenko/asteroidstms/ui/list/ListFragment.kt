@@ -18,7 +18,6 @@ import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
-
 @AndroidEntryPoint
 class ListFragment : Fragment() {
 
@@ -63,7 +62,7 @@ class ListFragment : Fragment() {
     private fun setupRecyclerView() {
         binding?.recyclerView?.layoutManager = LinearLayoutManager(requireContext())
 
-//        val adapter = AsteroidsAdapter { asteroid ->
+//        val adapter = AsteroidsAdapter { Asteroids ->
 //            val action =
 //                ListFragmentDirections.actionListFragmentToDetailsFragment(asteroid.asteroidId)
 //            findNavController().navigate(action)

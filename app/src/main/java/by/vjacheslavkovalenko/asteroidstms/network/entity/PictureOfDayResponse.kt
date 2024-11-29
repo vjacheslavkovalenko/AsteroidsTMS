@@ -7,5 +7,6 @@ data class PictureOfDayResponse(
     val title: String,
     @SerializedName("url")
     val url: String,
+    // Описание картинки дня.
     val explanation: String
 )

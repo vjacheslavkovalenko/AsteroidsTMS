@@ -11,7 +11,7 @@ class LoadAsteroidDetailsUseCase @Inject constructor(
 ) {
 
     suspend fun loadAsteroidDetails(asteroidId: String): AsteroidDetails {
-        // Получаем сущность из кэша
+        // Получаем детали астероида (сущность) из кэша
         val entity = cacheRepository.loadAsteroidDetails(asteroidId)
 
         // Преобразуем сущность в модель
@@ -26,3 +26,13 @@ class LoadAsteroidDetailsUseCase @Inject constructor(
         )
     }
 }
+//   private fun mapEntityToModel(entity: AsteroidDetailsEntity): AsteroidDetails {
+//       return AsteroidDetails(
+//           asteroidId = entity.asteroidId,
+//           nameAsteroid = entity.nameAsteroid,
+//           estimatedDiameterMin = entity.diameterMin,
+//           estimatedDiameterMax = entity.diameterMax,
+//           isPotentiallyHazardous = entity.isPotentiallyHazardous // Добавьте нужные поля здесь.
+//       )
+//   }
+//}

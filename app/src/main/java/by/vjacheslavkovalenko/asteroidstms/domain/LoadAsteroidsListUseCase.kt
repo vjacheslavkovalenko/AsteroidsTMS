@@ -15,10 +15,24 @@ import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.flow.map
 import javax.inject.Inject
 import by.vjacheslavkovalenko.asteroidstms.model.Asteroids
+import by.vjacheslavkovalenko.asteroidstms.repository.ApiRepository
 import kotlinx.coroutines.flow.Flow
 
+//class LoadAsteroidsListUseCase @Inject constructor(
+//   private val apiRepository: ApiRepository
+//) {
+//
+//   suspend fun execute(
+//   apiKey: String, startDate: String, endDate: String
+//   ): Flow<List<Asteroids>> {
+//       return apiRepository.getListAsteroids(apiKey, startDate, endDate) // Получаем список астероидов из репозитория.
+//   }
+//}
+
+
 class LoadAsteroidsListUseCase @Inject constructor(
-    private val cacheRepository: CacheRepository
+    private val cacheRepository: CacheRepository,
+    private val apiRepository: ApiRepository
 ) {
 //    suspend fun loadData() = cacheRepository.getListAsteroids()
 
@@ -26,6 +40,20 @@ class LoadAsteroidsListUseCase @Inject constructor(
     fun loadData(): Flow<PagingData<AsteroidsEntity>> {
         return cacheRepository.getPagedListAsteroids()
     }
+
+    //        suspend fun execute(apiKey: String, startDate: String, endDate: String): Flow<List<Asteroids>> {
+    suspend fun execute(
+        apiKey: String,
+        startDate: String,
+        endDate: String
+    ): Flow<PagingData<Asteroids>> {
+        return apiRepository.getListAsteroids(
+            apiKey,
+            startDate,
+            endDate
+        )// Получаем список астероидов из репозитория.
+    }
+
 }
 //class LoadAsteroidsListUseCase @Inject constructor(
 //    private val asteroidsListRemoteMediator: AsteroidsListRemoteMediator,

@@ -1,5 +1,6 @@
 package by.vjacheslavkovalenko.asteroidstms.repository
 
+import androidx.paging.PagingData
 import by.vjacheslavkovalenko.asteroidstms.model.Asteroids
 import by.vjacheslavkovalenko.asteroidstms.model.PictureOfDay
 import kotlinx.coroutines.flow.Flow
@@ -17,7 +18,8 @@ interface ApiRepository {
         apiKey: String,
         startDate: String,
         endDate: String
-    ): Flow<List<Asteroids>>
+//    ): Flow<List<Asteroids>>
+    ): Flow<PagingData<Asteroids>>
 
     /**
      * Получение картинки дня.

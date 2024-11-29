@@ -20,13 +20,14 @@ import javax.inject.Inject
 //    }
 //}
 
+
 object AsteroidsMapper {
 
     // Преобразование из AsteroidsEntity в Asteroids
     fun mapToModel(entity: AsteroidsEntity): Asteroids {
         return Asteroids(
             asteroidId = entity.asteroidId,
-            nameAsteroid = entity.name,
+            nameAsteroid = entity.nameAsteroid,
             estimatedDiameterMin = entity.estimatedDiameterMin,
             estimatedDiameterMax = entity.estimatedDiameterMax,
             isPotentiallyHazardous = entity.isPotentiallyHazardous
@@ -42,7 +43,7 @@ object AsteroidsMapper {
     fun mapToEntity(model: Asteroids): AsteroidsEntity {
         return AsteroidsEntity(
             asteroidId = model.asteroidId,
-            name = model.nameAsteroid,
+            nameAsteroid = model.nameAsteroid,
             estimatedDiameterMin = model.estimatedDiameterMin,
             estimatedDiameterMax = model.estimatedDiameterMax,
             isPotentiallyHazardous = model.isPotentiallyHazardous

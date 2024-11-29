@@ -4,6 +4,11 @@ import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
+
+
+//    val estimatedDiameterMin: Double,
+//    val estimatedDiameterMax: Double,
+//)
 @Entity(tableName = "AsteroidDetails")
 data class AsteroidDetailsEntity(
     @PrimaryKey
