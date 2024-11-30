@@ -2,19 +2,9 @@ package by.vjacheslavkovalenko.asteroidstms.ui.details.domain
 
 import by.vjacheslavkovalenko.asteroidstms.model.AsteroidDetails
 
+//555
 sealed class DetailsFragmentState {
-
-    data object Init : DetailsFragmentState() // Начальное состояние
-
-    data object DetailsLoading : DetailsFragmentState() // Состояние загрузки
-
-    data class DetailsLoaded(
-        val asteroidDetails: AsteroidDetails
-    ) : DetailsFragmentState() // Успешно загруженные данные
-
-    data class Error(
-        val message: String
-    ) : DetailsFragmentState() // Ошибка при загрузке данных
-
+    object Loading : DetailsFragmentState() // Состояние загрузки
+    data class Success(val asteroidDetails: AsteroidDetails) : DetailsFragmentState() // Успешное получение данных
+    data class Error(val message: String) : DetailsFragmentState() // Ошибка при получении данных
 }
-//data class PictureLoaded(val picture: PictureOfDayEntity) : PictureFragmentState()

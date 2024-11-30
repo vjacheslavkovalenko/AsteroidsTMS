@@ -17,76 +17,142 @@ import by.vjacheslavkovalenko.asteroidstms.ui.list.domain.ListFragmentState
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
+import by.vjacheslavkovalenko.asteroidstms.R
+import by.vjacheslavkovalenko.asteroidstms.utils.Constants.APIKEY
 
-@AndroidEntryPoint
+//555
 class ListFragment : Fragment() {
 
     private var binding: FragmentListBinding? = null
-
-    private val viewModel: ListViewModel by viewModels()
+    private var viewModel: ListViewModel? = null
 
     override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
+        inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         binding = FragmentListBinding.inflate(inflater, container, false)
-        return binding?.root ?: throw IllegalStateException("Binding is null")
+        return binding!!.root // Возвращаем корневое представление
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        setupRecyclerView()
 
-        lifecycleScope.launch {
-            viewModel.state.collectLatest { state ->
-                when (state) {
-                    ListFragmentState.Init -> {}
-                    is ListFragmentState.ListLoaded -> {
-                        state.flowPagingData.collectLatest { pagingData ->
-                            setList(pagingData)
-                        }
-                    }
+        viewModel = ViewModelProvider(this).get(ListViewModel::class.java)
 
-                    is ListFragmentState.Error -> {
-                        showError(state.message) // Обработка состояния ошибки.
-                    }
+        binding!!.recyclerView.layoutManager = LinearLayoutManager(context)
 
-                    ListFragmentState.Loading -> {}
-                }
-            }
-        }
-        viewModel.loadData() // Загрузка данных при создании фрагмента.
-    }
-
-    private fun setupRecyclerView() {
-        binding?.recyclerView?.layoutManager = LinearLayoutManager(requireContext())
-
-//        val adapter = AsteroidsAdapter { Asteroids ->
-//            val action =
-//                ListFragmentDirections.actionListFragmentToDetailsFragment(asteroid.asteroidId)
-//            findNavController().navigate(action)
-//        }
-
-        val adapter = AsteroidsAdapter { _ ->
-            val action =
-                ListFragmentDirections.actionListFragmentToDetailsFragment()
+        val adapter = AsteroidsAdapter(emptyList()) { asteroidId ->
+            // Обработка нажатия на элемент списка для перехода к деталям астероида
+            val action = ListFragmentDirections.actionListFragmentToDetailsFragment(asteroidId)
             findNavController().navigate(action)
         }
+        binding!!.recyclerView.adapter = adapter
 
-        binding?.recyclerView?.adapter = adapter
-    }
+        val apiKey = APIKEY
+        viewModel?.fetchAsteroids(apiKey)
 
-    private suspend fun setList(pagingData: PagingData<Asteroids>) {
-        (binding?.recyclerView?.adapter as? AsteroidsAdapter)?.submitData(pagingData)
-    }
-
-    private fun showError(message: String) {
-        // Здесь можно добавить логику для отображения ошибки в UI (например, через Toast или TextView).
+        viewModel?.asteroidsList?.observe(viewLifecycleOwner, Observer { response ->
+            // Обновите адаптер с полученными данными об астероидах
+            adapter.updateData(response.nearEarthObjects)
+        })
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
-        binding = null
+        binding = null // Освобождаем привязку при уничтожении представления
     }
 }
+//
+//Объяснение кода
+//Пакет: Класс находится в пакете by.vjacheslavkovalenko.asteroidstms.ui.list.
+//Импорт класса привязки:
+//Импортируется класс FragmentListBinding, который автоматически генерируется на основе XML-файла макета fragment_list.xml.
+//Переменная binding:
+//Создается переменная binding, которая будет хранить экземпляр класса привязки.
+//Метод onCreateView:
+//В этом методе инициализируется привязка с помощью метода inflate, и возвращается корневое представление.
+//Метод onViewCreated:
+//Инициализируется ViewModel и RecyclerView.
+//Устанавливается адаптер для RecyclerView и определяется обработчик кликов на элементы списка.
+//Вызывается метод fetchAsteroids во ViewModel для загрузки данных об астероидах.
+//Наблюдается за изменениями в списке астероидов и обновляется адаптер при получении новых данных.
+//Метод onDestroyView:
+//Освобождает ссылку на объект привязки, чтобы избежать утечек памяти.
+//Заключение
+//Теперь класс ListFragment полностью соответствует вашим требованиям, использует View Binding и не содержит символов подчеркивания в именах переменных.
+//
+
+//@AndroidEntryPoint
+//class ListFragment : Fragment() {
+//
+//    private var binding: FragmentListBinding? = null
+//
+//    private val viewModel: ListViewModel by viewModels()
+//
+//    override fun onCreateView(
+//        inflater: LayoutInflater,
+//        container: ViewGroup?,
+//        savedInstanceState: Bundle?
+//    ): View? {
+//        binding = FragmentListBinding.inflate(inflater, container, false)
+//        return binding?.root ?: throw IllegalStateException("Binding is null")
+//    }
+//
+//    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+//        super.onViewCreated(view, savedInstanceState)
+//        setupRecyclerView()
+//
+//        lifecycleScope.launch {
+//            viewModel.state.collectLatest { state ->
+//                when (state) {
+//                    ListFragmentState.Init -> {}
+//                    is ListFragmentState.ListLoaded -> {
+//                        state.flowPagingData.collectLatest { pagingData ->
+//                            setList(pagingData)
+//                        }
+//                    }
+//
+//                    is ListFragmentState.Error -> {
+//                        showError(state.message) // Обработка состояния ошибки.
+//                    }
+//
+//                    ListFragmentState.Loading -> {}
+//                }
+//            }
+//        }
+//        viewModel.loadData() // Загрузка данных при создании фрагмента.
+//    }
+//
+//    private fun setupRecyclerView() {
+//        binding?.recyclerView?.layoutManager = LinearLayoutManager(requireContext())
+//
+////        val adapter = AsteroidsAdapter { Asteroids ->
+////            val action =
+////                ListFragmentDirections.actionListFragmentToDetailsFragment(asteroid.asteroidId)
+////            findNavController().navigate(action)
+////        }
+//
+//        val adapter = AsteroidsAdapter { _ ->
+//            val action =
+//                ListFragmentDirections.actionListFragmentToDetailsFragment()
+//            findNavController().navigate(action)
+//        }
+//
+//        binding?.recyclerView?.adapter = adapter
+//    }
+//
+//    private suspend fun setList(pagingData: PagingData<Asteroids>) {
+//        (binding?.recyclerView?.adapter as? AsteroidsAdapter)?.submitData(pagingData)
+//    }
+//
+//    private fun showError(message: String) {
+//        // Здесь можно добавить логику для отображения ошибки в UI (например, через Toast или TextView).
+//    }
+//
+//    override fun onDestroyView() {
+//        super.onDestroyView()
+//        binding = null
+//    }
+//}

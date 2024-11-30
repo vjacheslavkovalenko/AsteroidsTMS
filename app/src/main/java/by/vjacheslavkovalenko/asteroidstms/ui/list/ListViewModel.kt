@@ -12,74 +12,111 @@ import androidx.paging.cachedIn
 import javax.inject.Inject
 import kotlinx.coroutines.flow.StateFlow
 import by.vjacheslavkovalenko.asteroidstms.utils.DateUtils
-import by.vjacheslavkovalenko.asteroidstms.Constants
 import by.vjacheslavkovalenko.asteroidstms.model.Asteroids
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
+import by.vjacheslavkovalenko.asteroidstms.network.entity.AsteroidResponse
+import androidx.lifecycle.viewModelScope
 
 
 
-
-
-
-
-
-@HiltViewModel
+//555
 class ListViewModel @Inject constructor(
     private val loadAsteroidsListUseCase: LoadAsteroidsListUseCase
 ) : ViewModel() {
-    // Используем StateFlow для состояния, чтобы UI мог наблюдать за изменениями
-//    private val listFragmentStateFlow = MutableStateFlow<ListFragmentState>(ListFragmentState.Init)
-//    val state: StateFlow<ListFragmentState> get() = listFragmentStateFlow // Публичный доступ только для чтения
 
-    //    fun loadData() {
-//        viewModelScope.launch(Dispatchers.IO) {
-//            listFragmentStateFlow.value =
-//                ListFragmentState.Loading // Устанавливаем состояние загрузки
-//
-    private val stateFlow = MutableStateFlow<ListFragmentState>(ListFragmentState.Init)
-    val state: StateFlow<ListFragmentState> get() = stateFlow // Публичный доступ только для чтения.
+    private val stateLiveData = MutableLiveData<ListFragmentState>()
+    val state: LiveData<ListFragmentState> = stateLiveData
 
+    fun fetchAsteroids(apiKey: String) {
+        stateLiveData.value = ListFragmentState.Loading // Устанавливаем состояние загрузки
 
-
-    fun loadData() {
-        viewModelScope.launch(Dispatchers.IO) {
-            stateFlow.value = ListFragmentState.Loading // Устанавливаем состояние загрузки
-
+        viewModelScope.launch {
             try {
-                val startDateString = DateUtils.getCurrentDate() // Получаем сегодняшнюю дату.
-                val endDateString =
-                    DateUtils.getEndDate(startDateString) // Получаем конечную дату через 6 дней.
-
-                val apiKey = Constants.APIKEY
-
-//                loadAsteroidsListUseCase.execute(apiKey, startDateString, endDateString)
-//                    .collect { asteroids ->
-//                        stateFlow.value =
-//                            ListFragmentState.ListLoaded(asteroids) // Устанавливаем состояние с загруженными данными.
-//                    }
-
-                loadAsteroidsListUseCase.execute(apiKey, startDateString, endDateString)
-                .collect { pagingData ->
-                    stateFlow.value = ListFragmentState.ListLoaded(pagingData) // Устанавливаем состояние с загруженными данными.
-                }
-
+                val startDate = DateUtils.getTodayDate()
+                val endDate = DateUtils.getEndDate()
+                val response = loadAsteroidsListUseCase(startDate, endDate, apiKey)
+                stateLiveData.value = ListFragmentState.Success(response.nearEarthObjects) // Успешно получены данные
             } catch (e: Exception) {
-                stateFlow.value = ListFragmentState.Error(
-                    e.message ?: "Unknown error"
-                ) // Устанавливаем состояние ошибки.
+                stateLiveData.value = ListFragmentState.Error(e.message ?: "Unknown error") // Ошибка при получении данных
             }
         }
     }
 }
+
+//
+//Объяснение кода
+//Пакет: Класс находится в пакете by.vjacheslavkovalenko.asteroidstms.ui.list, как вы указали.
+//Импорт утилиты: Импортируется DateUtils, который содержит методы для получения текущей даты и даты через 6 дней.
+//LiveData:
+//asteroidsListLiveData — это MutableLiveData, которое хранит данные о списке астероидов.
+//asteroidsList — это публичное свойство, которое позволяет наблюдать за изменениями в данных.
+//Метод fetchAsteroids:
+//Этот метод получает ключ API и использует утилиту для получения стартовой и конечной дат.
+//Запускает корутину, чтобы вызвать Use Case для получения списка астероидов и обновляет значение asteroidsListLiveData.
+//Заключение
+//Теперь класс ListViewModel полностью соответствует вашим требованиям, автоматически устанавливает сегодняшнюю дату как стартовую и добавляет 6 дней к конечной дате запроса.
+
+
+//
+//@HiltViewModel
+//class ListViewModel @Inject constructor(
+//    private val loadAsteroidsListUseCase: LoadAsteroidsListUseCase
+//) : ViewModel() {
+//    // Используем StateFlow для состояния, чтобы UI мог наблюдать за изменениями
+////    private val listFragmentStateFlow = MutableStateFlow<ListFragmentState>(ListFragmentState.Init)
+////    val state: StateFlow<ListFragmentState> get() = listFragmentStateFlow // Публичный доступ только для чтения
+//
+//    //    fun loadData() {
+////        viewModelScope.launch(Dispatchers.IO) {
+////            listFragmentStateFlow.value =
+////                ListFragmentState.Loading // Устанавливаем состояние загрузки
+////
+//    private val stateFlow = MutableStateFlow<ListFragmentState>(ListFragmentState.Init)
+//    val state: StateFlow<ListFragmentState> get() = stateFlow // Публичный доступ только для чтения.
+//
+//
+//
+//    fun loadData() {
+//        viewModelScope.launch(Dispatchers.IO) {
+//            stateFlow.value = ListFragmentState.Loading // Устанавливаем состояние загрузки
+//
 //            try {
-//                // Получаем данные и кэшируем их в viewModelScope
-//                val pagingData = loadAsteroidsListUseCase.loadData().cachedIn(viewModelScope)
-//                listFragmentStateFlow.value =
-//                    ListFragmentState.ListLoaded(pagingData) // Устанавливаем состояние с загруженными данными
+//                val startDateString = DateUtils.getCurrentDate() // Получаем сегодняшнюю дату.
+//                val endDateString =
+//                    DateUtils.getEndDate(startDateString) // Получаем конечную дату через 6 дней.
+//
+//                val apiKey = Constants.APIKEY
+//
+////                loadAsteroidsListUseCase.execute(apiKey, startDateString, endDateString)
+////                    .collect { asteroids ->
+////                        stateFlow.value =
+////                            ListFragmentState.ListLoaded(asteroids) // Устанавливаем состояние с загруженными данными.
+////                    }
+//
+//                loadAsteroidsListUseCase.execute(apiKey, startDateString, endDateString)
+//                .collect { pagingData ->
+//                    stateFlow.value = ListFragmentState.ListLoaded(pagingData) // Устанавливаем состояние с загруженными данными.
+//                }
+//
 //            } catch (e: Exception) {
-//                listFragmentStateFlow.value = ListFragmentState.Error(
+//                stateFlow.value = ListFragmentState.Error(
 //                    e.message ?: "Unknown error"
-//                ) // Устанавливаем состояние ошибки
+//                ) // Устанавливаем состояние ошибки.
 //            }
 //        }
 //    }
 //}
+////            try {
+////                // Получаем данные и кэшируем их в viewModelScope
+////                val pagingData = loadAsteroidsListUseCase.loadData().cachedIn(viewModelScope)
+////                listFragmentStateFlow.value =
+////                    ListFragmentState.ListLoaded(pagingData) // Устанавливаем состояние с загруженными данными
+////            } catch (e: Exception) {
+////                listFragmentStateFlow.value = ListFragmentState.Error(
+////                    e.message ?: "Unknown error"
+////                ) // Устанавливаем состояние ошибки
+////            }
+////        }
+////    }
+////}

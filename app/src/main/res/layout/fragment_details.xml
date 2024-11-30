@@ -4,6 +4,16 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="16dp">
+    <ProgressBar
+        android:id="@+id/progress_bar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"/>
+
     <TextView
         android:id="@+id/textViewAsteroidName"
         android:layout_width="wrap_content"
@@ -11,7 +21,10 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginTop="20dp"/>
+        android:layout_marginTop="20dp"
+        android:layout_below="@id/progress_bar"
+        android:visibility="gone"/>
+
 
     <TextView
         android:id="@+id/textViewDiameter"
@@ -20,7 +33,9 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/textViewAsteroidName"
-        android:layout_marginTop="20dp"/>
+        android:layout_marginTop="20dp"
+        android:layout_below="@id/progress_bar"
+        android:visibility="gone"/>
 
     <TextView
         android:id="@+id/textViewHazardous"
@@ -29,7 +44,9 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/textViewDiameter"
-        android:layout_marginTop="20dp"/>
+        android:layout_marginTop="20dp"
+        android:layout_below="@id/progress_bar"
+        android:visibility="gone"/>
 
     <TextView
         android:id="@+id/errorTextView"
@@ -37,6 +54,8 @@
         android:layout_height="156dp"
         android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"/>
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_below="@id/progress_bar" />
 
+    </RelativeLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
