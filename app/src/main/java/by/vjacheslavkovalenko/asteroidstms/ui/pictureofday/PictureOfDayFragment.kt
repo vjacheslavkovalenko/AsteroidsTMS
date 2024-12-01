@@ -15,6 +15,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
+//555
 @AndroidEntryPoint
 class PictureOfDayFragment : Fragment() {
 
@@ -25,43 +26,23 @@ class PictureOfDayFragment : Fragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-//        return FragmentPictureOfDayBinding.inflate(layoutInflater, container, false).also {
-//            binding = it
-//        }.root
+    ): View {
         binding = FragmentPictureOfDayBinding.inflate(inflater, container, false)
         return binding?.root ?: throw IllegalStateException("Binding is null")
-//        binding = FragmentPictureOfDayBinding.inflate(inflater)
-//        return binding?.root
     }
-
-    //    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-//        super.onViewCreated(view, savedInstanceState)
-//        lifecycleScope.launch {
-//            viewModel.state.collectLatest { state ->
-//                when (state) {
-//                    ListFragmentState.Init -> {}
-//                    is ListFragmentState.ListLoaded -> {
-//                        state.flowPagingData.collectLatest {
-//                            setList(it)
-//                        }
-//                    }
-//                }
-//            }
-//        }
-//    }
-
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
         lifecycleScope.launch {
             viewModel.state.collectLatest { state ->
                 when (state) {
-                    is PictureFragmentState.Init -> {}
-                    is PictureFragmentState.PictureLoaded -> {
+                    is PictureFragmentState.Loading -> {
+                        // Здесь можно показать индикатор загрузки, если необходимо
+                    }
+                    is PictureFragmentState.Success -> {
                         displayPicture(state.picture)
                     }
-
                     is PictureFragmentState.Error -> {
                         showError(state.message)
                     }
@@ -70,24 +51,45 @@ class PictureOfDayFragment : Fragment() {
         }
 
         // Загружаем картинку дня при создании фрагмента
-        viewModel.loadPicture()
+        viewModel.fetchPictureOfDay()
     }
 
     private fun displayPicture(picture: PictureOfDayEntity) {
-        //       Glide.with(this).load(picture.url).into(binding!!.imageViewPictureOfDayDetail)
         binding?.imageViewPictureOfDayDetail?.let { imageView ->
             Glide.with(this).load(picture.url)
-                .into(imageView) //  библиотекa Glide для загрузки изображений
+                .into(imageView) // Используем библиотеку Glide для загрузки изображений
         }
-        binding?.textViewDescription?.text = picture.explanation
+        binding?.textViewDescription?.text = picture.explanation // Устанавливаем описание картинки
     }
 
     private fun showError(message: String) {
-        binding?.errorTextView?.text = message // Предполагается наличие TextView для ошибок
+        binding?.errorTextView?.text = message // Предполагается наличие TextView для отображения ошибок
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
-        binding = null
+        binding = null // Очищаем привязку при уничтожении представления
     }
 }
+//
+//Объяснение кода
+//Импорт необходимых классов:
+//Импортируются классы для работы с фрагментами, ViewModel, корутинами и библиотекой Glide.
+//Класс PictureOfDayFragment:
+//Аннотирован с помощью @AndroidEntryPoint, что позволяет использовать внедрение зависимостей через Dagger Hilt.
+//Использует FragmentPictureOfDayBinding для привязки пользовательского интерфейса.
+//Метод onCreateView:
+//Инициализирует привязку и возвращает корневое представление.
+//Метод onViewCreated:
+//Подписывается на состояние ViewModel и обновляет пользовательский интерфейс в зависимости от состояния (загрузка, успех или ошибка).
+//Вызывает метод fetchPictureOfDay() для загрузки данных о картине дня.
+//Метод displayPicture:
+//Использует библиотеку Glide для загрузки изображения из URL в ImageView.
+//Устанавливает текст описания картинки.
+//Метод showError:
+//Отображает сообщение об ошибке в TextView.
+//Метод onDestroyView:
+//Очищает привязку при уничтожении представления, чтобы избежать утечек памяти.
+//Заключение
+//Теперь у вас есть полностью реализованный класс PictureOfDayFragment, который управляет отображением картины дня в пользовательском интерфейсе и взаимодействует с ViewModel для загрузки данных.
+//

@@ -8,10 +8,17 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import by.vjacheslavkovalenko.asteroidstms.R
 import by.vjacheslavkovalenko.asteroidstms.databinding.FragmentMainBinding
+import com.bumptech.glide.Glide
+import androidx.fragment.app.viewModels
+import by.vjacheslavkovalenko.asteroidstms.domain.LoadPictureOfDayUseCase
+import dagger.hilt.android.AndroidEntryPoint
 
+//555
+@AndroidEntryPoint
 class MainFragment : Fragment() {
 
     private var binding: FragmentMainBinding? = null
+    private val loadPictureOfDayUseCase: LoadPictureOfDayUseCase by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -25,12 +32,20 @@ class MainFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        // Обработка нажатия на кнопку "О приложении"
         binding?.buttonAboutApp?.setOnClickListener {
             findNavController().navigate(R.id.action_mainFragment_to_aboutAppFragment)
         }
 
+        // Обработка нажатия на кнопку "Радар астероидов"
         binding?.buttonRadarAsteroids?.setOnClickListener {
             findNavController().navigate(R.id.action_mainFragment_to_listFragment)
+        }
+
+        // Обработка нажатия на кнопку "Что такое астероиды?"
+        binding?.buttonWhatAreAsteroids?.setOnClickListener {
+            // Здесь можно добавить логику для отображения информации о астероидах.
+            // Например, открыть новый фрагмент с информацией.
         }
 
         //пробую по клику на фото открыть новое окно (с ним и описанием)
@@ -38,16 +53,29 @@ class MainFragment : Fragment() {
             findNavController().navigate(R.id.action_mainFragment_to_pictureOfDayFragment)
         }
 
+        // Загрузка картинки дня в ImageView с помощью Glide
+        loadPictureOfDay()
+    }
 
 
+    private fun loadPictureOfDay() {
+        viewLifecycleOwner.lifecycleScope.launchWhenStarted {
+            try {
+                val pictureOfDay = loadPictureOfDayUseCase() // Получаем картину дня
 
-        binding?.buttonWhatAreAsteroids?.setOnClickListener {
-            // Здесь можно добавить логику для отображения информации о астероидах.
+                if (pictureOfDay != null) {
+                    Glide.with(this@MainFragment)
+                        .load(pictureOfDay.url) // Замените на правильное свойство URL
+                        .into(binding?.imageViewPictureOfDay!!)
+                } else {
+                    // Установка изображения-заполнителя, если данных нет
+                    binding?.imageViewPictureOfDay?.setImageResource(R.drawable.placeholder_image)
+                }
+            } catch (e: Exception) {
+                // Обработка ошибок загрузки изображения
+                binding?.imageViewPictureOfDay?.setImageResource(R.drawable.error_image)
+            }
         }
-
-        // Загрузить картину дня через ViewModel или API и установить в ImageView и TextView.
-        // Например:
-        // loadPictureOfDay()
     }
 
     override fun onDestroyView() {
@@ -55,3 +83,23 @@ class MainFragment : Fragment() {
         binding = null
     }
 }
+
+//Объяснение кода MainFragment
+//Импорт необходимых классов:
+//Импортируются классы для работы с фрагментами, навигацией, привязкой пользовательского интерфейса и библиотекой Glide.
+//Класс MainFragment:
+//Этот класс представляет главный экран приложения и наследуется от Fragment.
+//Переменная binding:
+//Используется для привязки элементов пользовательского интерфейса из XML-файла разметки.
+//Метод onCreateView:
+//Инициализирует привязку и возвращает корневое представление фрагмента.
+//Метод onViewCreated:
+//Устанавливает обработчики кликов для кнопок и вызывает метод loadPictureOfDay() для загрузки картинки дня.
+//Метод loadPictureOfDay:
+//Загружает данные о картине дня через UseCase.
+//Использует Glide для отображения изображения в ImageView.
+//Обрабатывает случаи отсутствия данных и ошибки.
+//Метод onDestroyView:
+//Очищает привязку при уничтожении представления, чтобы избежать утечек памяти.
+//Заключение
+//Теперь у вас есть полностью реализованные классы LoadPictureOfDayUseCase и MainFragment, которые обеспечивают функциональность загрузки и отображения картинки дня на главном экране вашего приложения.

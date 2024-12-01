@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import by.vjacheslavkovalenko.asteroidstms.databinding.FragmentAboutAppBinding
 
+//555
 class AboutAppFragment : Fragment() {
 
     private var binding : FragmentAboutAppBinding? = null
@@ -23,8 +24,11 @@ class AboutAppFragment : Fragment() {
     override fun onViewCreated(view : View, savedInstanceState : Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        // Устанавливаем текст о приложении
         binding?.textViewAboutApp?.text = "Данное приложение показывает фото дня и радар астероидов."
-        // Здесь вы можете установить картинку дня так же, как в других фрагментах.
+                // Здесь вы можете установить картинку дня так же, как в других фрагментах.
+        // Например, если у вас есть ViewModel для загрузки данных о картине дня:
+        // loadPictureOfDay()
     }
 
     override fun onDestroyView() {

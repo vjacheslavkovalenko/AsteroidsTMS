@@ -3,16 +3,29 @@ package by.vjacheslavkovalenko.asteroidstms.domain
 import by.vjacheslavkovalenko.asteroidstms.repository.CacheRepository
 import javax.inject.Inject
 import by.vjacheslavkovalenko.asteroidstms.model.PictureOfDay
+import by.vjacheslavkovalenko.asteroidstms.database.entity.PictureOfDayEntity
 
-//*****
+//555
 class LoadPictureOfDayUseCase @Inject constructor(
     private val cacheRepository: CacheRepository
 ) {
-
-    suspend operator fun invoke(): PictureOfDay? {
-        return cacheRepository.getPictureOfDay() // Получаем картину дня из репозитория
+    suspend operator fun invoke(): PictureOfDayEntity? {
+        val picture = cacheRepository.getPictureOfDay() // Получаем картину дня из репозитория
+        return picture?.let {
+            // Преобразуем PictureOfDay в PictureOfDayEntity
+            PictureOfDayEntity(url = it.url, title = it.title, explanation = it.explanation)
+        }
     }
 }
+//*****
+//class LoadPictureOfDayUseCase @Inject constructor(
+//    private val cacheRepository: CacheRepository
+//) {
+//
+//    suspend operator fun invoke(): PictureOfDay? {
+//        return cacheRepository.getPictureOfDay() // Получаем картину дня из репозитория
+//    }
+//}
 //
 //
 //Класс LoadPictureOfDayUseCase будет представлять бизнес-логику для получения информации о картине дня из репозитория. Он будет инкапсулировать логику получения данных и преобразования их в модель, используемую во ViewModel.
