@@ -5,7 +5,7 @@ import by.vjacheslavkovalenko.asteroidstms.model.Asteroids
 import by.vjacheslavkovalenko.asteroidstms.network.entity.AsteroidResponse
 import javax.inject.Inject
 import by.vjacheslavkovalenko.asteroidstms.network.entity.NearEarthObject
-import org.checkerframework.checker.units.qual.min
+//import org.checkerframework.checker.units.qual.min
 
 //555
 object AsteroidsMapper {

@@ -1,9 +1,10 @@
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
-    alias(libs.plugins.dagger.hilt.android)
+//    alias(libs.plugins.dagger.hilt.android)
+
     alias(libs.plugins.kotlin.serialization)
-    alias(libs.plugins.ksp)
+//    alias(libs.plugins.ksp)
     alias(libs.plugins.navigation.safeargs)
     alias(libs.plugins.room)
 //    alias(libs.plugins.navigation.safeargs.kotlin)
@@ -59,7 +60,9 @@ dependencies {
     implementation(libs.androidx.constraintlayout)
     implementation(libs.lottie)
     implementation(libs.dagger.hilt.android)
-    implementation(libs.dagger.hilt.android.compiler)
+
+//    implementation(libs.dagger.compiler)
+//    implementation(libs.dagger.hilt.android.compiler)
     implementation(libs.navigation.fragment)
     implementation(libs.navigation.ui)
     implementation(libs.lifecycle.viewmodel.ktx)
@@ -77,8 +80,10 @@ dependencies {
     implementation(libs.room.runtime)
     implementation(libs.room.paging)
     annotationProcessor(libs.room.compiler)
-    ksp(libs.room.compiler)
+//    ksp(libs.room.compiler)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
 }
+
+
