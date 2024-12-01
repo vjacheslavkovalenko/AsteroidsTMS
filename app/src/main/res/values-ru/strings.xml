@@ -10,5 +10,7 @@
     <string name="hazardous">Потенциально Опасный</string>
     <string name="not_hazardous">Не Опасный</string>
 
+    <string name="picture_of_day_detail">Фото дня</string>
+    <string name="text_about_app">О приложении</string>
 
 </resources>
