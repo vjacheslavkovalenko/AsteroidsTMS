@@ -9,7 +9,8 @@ import by.vjacheslavkovalenko.asteroidstms.database.entity.AsteroidsEntity
 import by.vjacheslavkovalenko.asteroidstms.database.entity.PictureOfDayEntity
 import androidx.room.Room
 
-//*****
+//555
+
 @Database(
     entities = [AsteroidsEntity::class, AsteroidDetailsEntity::class, PictureOfDayEntity::class],
     version = 1,

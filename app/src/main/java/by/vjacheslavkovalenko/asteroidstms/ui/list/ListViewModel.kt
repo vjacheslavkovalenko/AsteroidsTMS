@@ -3,43 +3,43 @@ package by.vjacheslavkovalenko.asteroidstms.ui.list
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import by.vjacheslavkovalenko.asteroidstms.domain.LoadAsteroidsListUseCase
+import by.vjacheslavkovalenko.asteroidstms.network.entity.NearEarthObjects
 import by.vjacheslavkovalenko.asteroidstms.ui.list.domain.ListFragmentState
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.launch
-import androidx.paging.cachedIn
 import javax.inject.Inject
 import kotlinx.coroutines.flow.StateFlow
 import by.vjacheslavkovalenko.asteroidstms.utils.DateUtils
-import by.vjacheslavkovalenko.asteroidstms.model.Asteroids
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import by.vjacheslavkovalenko.asteroidstms.network.entity.AsteroidResponse
-import androidx.lifecycle.viewModelScope
-
-
+import kotlinx.coroutines.flow.collectLatest
 
 //555
+@HiltViewModel
 class ListViewModel @Inject constructor(
     private val loadAsteroidsListUseCase: LoadAsteroidsListUseCase
 ) : ViewModel() {
 
-    private val stateLiveData = MutableLiveData<ListFragmentState>()
-    val state: LiveData<ListFragmentState> = stateLiveData
+    private val state = MutableStateFlow<ListFragmentState>(ListFragmentState.Loading)
+    val stateFlow: StateFlow<ListFragmentState> = state
 
     fun fetchAsteroids(apiKey: String) {
-        stateLiveData.value = ListFragmentState.Loading // Устанавливаем состояние загрузки
+        state.value = ListFragmentState.Loading // Устанавливаем состояние загрузки
 
+//        viewModelScope.launch {
+//            try {
+//                val startDate = DateUtils.getTodayDate()
+//                val endDate = DateUtils.getEndDate()
+//                val response = loadAsteroidsListUseCase(startDate, endDate, apiKey)
+//                state.value = ListFragmentState.Success(response.nearEarthObjects) // Успешно получены данные
+//            } catch (e: Exception) {
+//                state.value = ListFragmentState.Error(e.message ?: "Unknown error") // Ошибка при получении данных
+//            }
+//        }
         viewModelScope.launch {
-            try {
-                val startDate = DateUtils.getTodayDate()
-                val endDate = DateUtils.getEndDate()
-                val response = loadAsteroidsListUseCase(startDate, endDate, apiKey)
-                stateLiveData.value = ListFragmentState.Success(response.nearEarthObjects) // Успешно получены данные
-            } catch (e: Exception) {
-                stateLiveData.value = ListFragmentState.Error(e.message ?: "Unknown error") // Ошибка при получении данных
-            }
+            loadAsteroidsListUseCase(DateUtils.getTodayDate(), DateUtils.getEndDate(), apiKey)
+                .collectLatest { pagingData ->
+                    state.value = ListFragmentState.Success(pagingData) // Успешно получены данные как PagingData
+                }
         }
     }
 }

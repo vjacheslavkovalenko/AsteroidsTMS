@@ -4,6 +4,8 @@ import by.vjacheslavkovalenko.asteroidstms.utils.Constants.APIKEY
 import by.vjacheslavkovalenko.asteroidstms.network.entity.AsteroidResponse
 import by.vjacheslavkovalenko.asteroidstms.network.entity.ListAsteroidsResponse
 import by.vjacheslavkovalenko.asteroidstms.network.entity.ListRadarAsteroidsResponse
+import by.vjacheslavkovalenko.asteroidstms.network.entity.NearEarthObject
+import by.vjacheslavkovalenko.asteroidstms.network.entity.NearEarthObjects
 import by.vjacheslavkovalenko.asteroidstms.network.entity.PictureOfDayResponse
 //import by.vjacheslavkovalenko.asteroidstms.utils.convertDateToString
 //import by.vjacheslavkovalenko.asteroidstms.utils.toDate
@@ -22,7 +24,7 @@ interface Api {
         @Query("start_date") startDate: String,
         @Query("end_date") endDate: String,
         @Query("api_key") apiKey: String = APIKEY
-    ): AsteroidResponse
+    ): NearEarthObjects
 
     // Метод для получения информации о картине дня
     @GET("planetary/apod")
@@ -99,9 +101,6 @@ interface Api {
 //Возвращает объект PictureOfDayResponse, содержащий данные о картине дня.
 //Заключение
 //Интерфейс Api является важным компонентом архитектуры MVVM, обеспечивая связь между сетевыми запросами и бизнес-логикой приложения. Он позволяет вашему приложению взаимодействовать с внешним API для получения актуальных данных об астероидах и картине дня от NASA.
-
-
-
 
 
 //interface Api {

@@ -5,32 +5,35 @@ import androidx.paging.PagingState
 import by.vjacheslavkovalenko.asteroidstms.database.AsteroidsDao
 import by.vjacheslavkovalenko.asteroidstms.model.Asteroids
 import by.vjacheslavkovalenko.asteroidstms.database.entity.AsteroidsEntity
+import by.vjacheslavkovalenko.asteroidstms.network.Api
+import by.vjacheslavkovalenko.asteroidstms.network.entity.NearEarthObject
 
+
+//555
 class AsteroidPagingSource(
-    private val asteroidsDao: AsteroidsDao
-) : PagingSource<Int, AsteroidsEntity>() {
+    private val api: Api,
+    private val startDate: String,
+    private val endDate: String,
+    private val apiKey: String
+) : PagingSource<Int, NearEarthObject>() {
 
-    override suspend fun load(params: LoadParams<Int>): LoadResult<Int, AsteroidsEntity> {
-        val page = params.key ?: 0 // Начинаем с первой страницы (0)
-
+    override suspend fun load(params: LoadParams<Int>): LoadResult<Int, NearEarthObject> {
         return try {
-            // Используем метод pagingSource() для получения списка астероидов
-            val response = asteroidsDao.getListAsteroids() // Получаем список астероидов из DAO
+            val response = api.getAsteroids(startDate, endDate, apiKey)
+            val nearEarthObjects = response.nearEarthObjects // Получаем список объектов
 
             LoadResult.Page(
-                data = response, // Здесь мы возвращаем список сущностей AsteroidsEntity
-                prevKey = if (page == 0) null else page - 1,
-                nextKey = if (response.isEmpty()) null else page + 1 // Установите ключ для следующей страницы
+                data = nearEarthObjects,
+                prevKey = null, // Укажите предыдущий ключ, если он есть
+                nextKey = null // Укажите следующий ключ, если он есть
             )
-        } catch (exception: Exception) {
-            LoadResult.Error(exception)
+        } catch (e: Exception) {
+            LoadResult.Error(e)
         }
     }
 
-    override fun getRefreshKey(state: PagingState<Int, AsteroidsEntity>): Int? {
-        return state.anchorPosition?.let { anchorPosition ->
-            state.closestPageToPosition(anchorPosition)?.prevKey?.plus(1)
-                ?: state.closestPageToPosition(anchorPosition)?.nextKey?.minus(1)
-        }
+    override fun getRefreshKey(state: PagingState<Int, NearEarthObject>): Int? {
+        return null // Логика для получения ключа для обновления
     }
 }
+

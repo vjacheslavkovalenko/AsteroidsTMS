@@ -5,19 +5,34 @@ import by.vjacheslavkovalenko.asteroidstms.database.entity.AsteroidsEntity
 import by.vjacheslavkovalenko.asteroidstms.database.entity.PictureOfDayEntity
 import kotlinx.coroutines.flow.Flow
 import androidx.paging.PagingData
+import androidx.paging.PagingSource
 import by.vjacheslavkovalenko.asteroidstms.model.AsteroidDetails
 import by.vjacheslavkovalenko.asteroidstms.model.PictureOfDay
 import by.vjacheslavkovalenko.asteroidstms.model.Asteroids
 
-//*****
+//555
 interface CacheRepository {
+    // Получение деталей астероида по его идентификатору
     suspend fun getAsteroidDetails(asteroidId: String): AsteroidDetails?
+
+    // Сохранение деталей астероида
     suspend fun saveAsteroidDetails(asteroidDetails: AsteroidDetails)
-    suspend fun getListAsteroids(): List<Asteroids> // Метод переименован
+
+    // Получение списка астероидов
+    suspend fun getListAsteroids(): List<Asteroids>
+
+    // Сохранение списка астероидов
     suspend fun saveAsteroids(asteroids: List<Asteroids>)
+
+    // Получение информации о картине дня
     suspend fun getPictureOfDay(): PictureOfDay?
+
+    // Сохранение информации о картине дня
     suspend fun savePictureOfDay(pictureOfDay: PictureOfDay)
+
+    suspend fun getAsteroidPagingSource(): PagingSource<Int, AsteroidsEntity>
 }
+
 
 //
 //Интерфейс CacheRepository будет определять методы для работы с кэшированными данными, такими как данные, сохраненные в локальной базе данных. Этот интерфейс будет использоваться для доступа к кэшированным данным о астероидах и картине дня.

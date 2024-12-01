@@ -23,8 +23,18 @@ class ApiRepositoryImpl @Inject constructor(
     private val api: Api
 ) : ApiRepository {
 
-    override suspend fun getAsteroids(startDate: String, endDate: String, apiKey: String): AsteroidResponse {
-        return api.getAsteroids(startDate, endDate, apiKey)
+    override suspend fun getAsteroids(
+        startDate: String,
+        endDate: String,
+        apiKey: String
+//    ): AsteroidResponse {
+    ): Flow<PagingData<NearEarthObject>> {
+//        return api.getAsteroids(startDate, endDate, apiKey)
+        return Pager(
+            config = PagingConfig(pageSize = 20),
+            pagingSourceFactory = { AsteroidPagingSource(api, startDate, endDate, apiKey) } // Используйте свой PagingSource
+        ).flow
+
     }
 
     override suspend fun getPictureOfDay(apiKey: String): PictureOfDayResponse {
@@ -63,8 +73,6 @@ class ApiRepositoryImpl @Inject constructor(
 //Заключение
 //Этот класс является важным компонентом архитектуры MVVM, обеспечивая связь между сетевыми запросами и бизнес-логикой приложения. Он позволяет вашему приложению взаимодействовать с внешним API для получения актуальных данных об астероидах и картине дня от NASA.
 //
-
-
 
 
 //*****
@@ -117,8 +125,6 @@ class ApiRepositoryImpl @Inject constructor(
 //Преобразует ответ из API в модель AsteroidDetails и возвращает её.
 //Дополнительные методы
 //В приведенном коде предполагается наличие методов расширения (toEntity(), toModel()), которые преобразуют объекты из сетевого формата в формат сущностей и моделей соответственно. Эти методы должны быть реализованы в соответствующих классах.
-
-
 
 
 //

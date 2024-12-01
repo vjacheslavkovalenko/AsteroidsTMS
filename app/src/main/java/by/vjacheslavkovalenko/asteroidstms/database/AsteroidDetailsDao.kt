@@ -6,7 +6,7 @@ import androidx.room.Query
 import by.vjacheslavkovalenko.asteroidstms.database.entity.AsteroidDetailsEntity
 import androidx.room.OnConflictStrategy
 
-//*****
+//555
 @Dao
 interface AsteroidDetailsDao {
 
@@ -14,7 +14,7 @@ interface AsteroidDetailsDao {
     suspend fun insertAsteroidDetails(asteroidDetails: AsteroidDetailsEntity)
 
     @Query("SELECT * FROM AsteroidDetails WHERE asteroidId == :asteroidId LIMIT 1")
-    suspend fun getAsteroidDetailsById(asteroidId: String): AsteroidDetailsEntity
+    suspend fun getAsteroidDetailsById(asteroidId: String): AsteroidDetailsEntity?
 }
 //Объяснение кода
 //Аннотация @Dao: Указывает, что этот интерфейс является Data Access Object (DAO) для работы с деталями астероидов.

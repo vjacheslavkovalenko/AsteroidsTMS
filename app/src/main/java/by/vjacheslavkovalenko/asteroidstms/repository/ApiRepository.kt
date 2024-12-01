@@ -5,13 +5,17 @@ import by.vjacheslavkovalenko.asteroidstms.model.AsteroidDetails
 import by.vjacheslavkovalenko.asteroidstms.model.Asteroids
 import by.vjacheslavkovalenko.asteroidstms.model.PictureOfDay
 import by.vjacheslavkovalenko.asteroidstms.network.entity.AsteroidResponse
+import by.vjacheslavkovalenko.asteroidstms.network.entity.NearEarthObject
+import by.vjacheslavkovalenko.asteroidstms.network.entity.NearEarthObjects
 import by.vjacheslavkovalenko.asteroidstms.network.entity.PictureOfDayResponse
 import kotlinx.coroutines.flow.Flow
 
 //555
 interface ApiRepository {
     // Метод для получения списка астероидов за указанный период
-    suspend fun getAsteroids(startDate: String, endDate: String, apiKey: String): AsteroidResponse
+//    suspend fun getAsteroids(startDate: String, endDate: String, apiKey: String): PagingData<NearEarthObject>
+//    suspend fun getAsteroids(startDate: String, endDate: String, apiKey: String): NearEarthObjects
+    suspend fun getAsteroids(startDate: String, endDate: String, apiKey: String): Flow<PagingData<NearEarthObject>>
 
     // Метод для получения информации о картине дня
     suspend fun getPictureOfDay(apiKey: String): PictureOfDayResponse

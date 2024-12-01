@@ -16,6 +16,8 @@ import kotlinx.coroutines.flow.map
 import javax.inject.Inject
 import by.vjacheslavkovalenko.asteroidstms.model.Asteroids
 import by.vjacheslavkovalenko.asteroidstms.network.entity.AsteroidResponse
+import by.vjacheslavkovalenko.asteroidstms.network.entity.NearEarthObject
+import by.vjacheslavkovalenko.asteroidstms.network.entity.NearEarthObjects
 import by.vjacheslavkovalenko.asteroidstms.repository.ApiRepository
 import kotlinx.coroutines.flow.Flow
 
@@ -23,7 +25,9 @@ import kotlinx.coroutines.flow.Flow
 class LoadAsteroidsListUseCase @Inject constructor(
     private val apiRepository: ApiRepository
 ) {
-    suspend operator fun invoke(startDate: String, endDate: String, apiKey: String): AsteroidResponse {
+    suspend operator fun invoke(startDate: String, endDate: String, apiKey: String): Flow<PagingData<NearEarthObject>> {
+//    suspend operator fun invoke(startDate: String, endDate: String, apiKey: String): NearEarthObjects {
+//    suspend operator fun invoke(startDate: String, endDate: String, apiKey: String): PagingData<NearEarthObject> {
         return apiRepository.getAsteroids(startDate, endDate, apiKey)
     }
 }

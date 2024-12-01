@@ -13,14 +13,16 @@ import by.vjacheslavkovalenko.asteroidstms.network.entity.NearEarthObject
 
 //555
 class AsteroidsAdapter(
-    private var asteroids: List<NearEarthObject>,
     private val onClick: (String) -> Unit // Функция обратного вызова для обработки кликов по астероидам
-) : RecyclerView.Adapter<AsteroidsAdapter.AsteroidViewHolder>() {
+) : PagingDataAdapter<NearEarthObject, AsteroidsAdapter.AsteroidViewHolder>(AsteroidDiffCallback()) {
 
-    inner class AsteroidViewHolder(private val binding: ItemAsteroidBinding) : RecyclerView.ViewHolder(binding.root) {
+    inner class AsteroidViewHolder(private val binding: ItemAsteroidBinding) :
+        RecyclerView.ViewHolder(binding.root) {
         fun bind(asteroid: NearEarthObject) {
-            binding.textViewName.text = asteroid.nameAsteroid // Пример привязки данных к UI элементам
-            binding.textViewDiameter.text = "Diameter: ${asteroid.estimatedDiameter.kilometers.estimatedDiameterMax} km" // Пример отображения диаметра
+            binding.textViewName.text =
+                asteroid.nameAsteroid // Пример привязки данных к UI элементам
+            binding.textViewDiameter.text =
+                "Diameter: ${asteroid.estimatedDiameter.kilometers.estimatedDiameterMax} km" // Пример отображения диаметра
 
             itemView.setOnClickListener {
                 onClick(asteroid.asteroidId) // Передаем идентификатор астероида при клике
@@ -29,24 +31,31 @@ class AsteroidsAdapter(
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): AsteroidViewHolder {
-        val binding = ItemAsteroidBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        val binding =
+            ItemAsteroidBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return AsteroidViewHolder(binding)
     }
 
     override fun onBindViewHolder(holder: AsteroidViewHolder, position: Int) {
-        holder.bind(asteroids[position])
+        val asteroid = getItem(position)
+        if (asteroid != null) {
+            holder.bind(asteroid)
+        }
     }
 
-    override fun getItemCount(): Int = asteroids.size
+    class AsteroidDiffCallback : DiffUtil.ItemCallback<NearEarthObject>() {
+        override fun areItemsTheSame(oldItem: NearEarthObject, newItem: NearEarthObject): Boolean {
+            return oldItem.asteroidId == newItem.asteroidId // Сравнение по идентификатору астероида
+        }
 
-    fun updateData(newAsteroids: List<NearEarthObject>) {
-        asteroids = newAsteroids
-        notifyDataSetChanged() // Обновляем адаптер с новыми данными
+        override fun areContentsTheSame(
+            oldItem: NearEarthObject,
+            newItem: NearEarthObject
+        ): Boolean {
+            return oldItem == newItem // Сравнение содержимого объектов
+        }
     }
 }
-
-
-
 
 
 //class AsteroidsAdapter(

@@ -1,15 +1,12 @@
 package by.vjacheslavkovalenko.asteroidstms.ui.list.domain
 
 import androidx.paging.PagingData
-import by.vjacheslavkovalenko.asteroidstms.database.entity.AsteroidsEntity
-import by.vjacheslavkovalenko.asteroidstms.model.Asteroids
-import kotlinx.coroutines.flow.Flow
 import by.vjacheslavkovalenko.asteroidstms.network.entity.NearEarthObject
 
 //555
 sealed class ListFragmentState {
     data object Loading : ListFragmentState() // Состояние загрузки
-    data class Success(val asteroids: List<NearEarthObject>) : ListFragmentState() // Успешное получение данных
+    data class Success(val data: PagingData<NearEarthObject>) : ListFragmentState() // Успешное получение данных
     data class Error(val message: String) : ListFragmentState() // Ошибка при получении данных
 }
 //

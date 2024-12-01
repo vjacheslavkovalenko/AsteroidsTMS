@@ -1,7 +1,10 @@
 package by.vjacheslavkovalenko.asteroidstms.di
 
+import androidx.paging.PagingSource
+import by.vjacheslavkovalenko.asteroidstms.database.entity.AsteroidsEntity
 import by.vjacheslavkovalenko.asteroidstms.repository.ApiRepository
 import by.vjacheslavkovalenko.asteroidstms.repository.ApiRepositoryImpl
+import by.vjacheslavkovalenko.asteroidstms.repository.AsteroidPagingSource
 import by.vjacheslavkovalenko.asteroidstms.repository.CacheRepository
 import by.vjacheslavkovalenko.asteroidstms.repository.CacheRepositoryImpl
 import dagger.Binds
@@ -10,16 +13,6 @@ import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 
 
-//*****
-//
-//@Module
-//@InstallIn(SingletonComponent::class)
-//abstract class RepositoryModule {
-//
-//    @Binds
-//    abstract fun bindApiRepository(apiRepositoryImpl: ApiRepositoryImpl): ApiRepository
-//}
-//
 //Класс RepositoryModule будет модулем для внедрения зависимостей с использованием Dagger Hilt, который связывает интерфейсы репозиториев с их реализациями. Он будет предоставлять необходимые зависимости для работы с данными в вашем приложении.
 //Объяснение кода
 //Аннотация @Module: Указывает, что этот класс является модулем Dagger Hilt, который предоставляет зависимости.
@@ -30,8 +23,7 @@ import dagger.hilt.components.SingletonComponent
 //Этот модуль упрощает внедрение зависимостей в вашем приложении и позволяет легко управлять репозиториями и их реализациями.
 
 
-
-
+//555
 @Module
 @InstallIn(SingletonComponent::class)
 abstract class RepositoryModule {
@@ -41,4 +33,7 @@ abstract class RepositoryModule {
 
     @Binds
     abstract fun bindCacheRepository(cacheRepositoryImpl: CacheRepositoryImpl): CacheRepository
+
+    @Binds
+    abstract fun bindAsteroidPagingSource(asteroidPagingSource: AsteroidPagingSource): PagingSource<Int, AsteroidsEntity>
 }

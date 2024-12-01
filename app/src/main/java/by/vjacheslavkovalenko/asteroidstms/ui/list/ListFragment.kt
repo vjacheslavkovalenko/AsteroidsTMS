@@ -23,10 +23,10 @@ import by.vjacheslavkovalenko.asteroidstms.R
 import by.vjacheslavkovalenko.asteroidstms.utils.Constants.APIKEY
 
 //555
+@AndroidEntryPoint
 class ListFragment : Fragment() {
 
     private var binding: FragmentListBinding? = null
-    private var viewModel: ListViewModel? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -39,24 +39,36 @@ class ListFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        viewModel = ViewModelProvider(this).get(ListViewModel::class.java)
+        val viewModel: ListViewModel by viewModels()
 
         binding!!.recyclerView.layoutManager = LinearLayoutManager(context)
 
-        val adapter = AsteroidsAdapter(emptyList()) { asteroidId ->
+        val adapter = AsteroidsAdapter { asteroidId ->
             // Обработка нажатия на элемент списка для перехода к деталям астероида
-            val action = ListFragmentDirections.actionListFragmentToDetailsFragment(asteroidId)
+            val action = ListFragmentDirections.actionListFragmentToDetailsFragment()
             findNavController().navigate(action)
         }
         binding!!.recyclerView.adapter = adapter
 
         val apiKey = APIKEY
-        viewModel?.fetchAsteroids(apiKey)
+        viewModel.fetchAsteroids(apiKey)
 
-        viewModel?.asteroidsList?.observe(viewLifecycleOwner, Observer { response ->
-            // Обновите адаптер с полученными данными об астероидах
-            adapter.updateData(response.nearEarthObjects)
-        })
+        lifecycleScope.launch {
+            viewModel.stateFlow.collectLatest { state ->
+                when (state) {
+                    is ListFragmentState.Loading -> {
+                        // Показать индикатор загрузки
+                    }
+                    is ListFragmentState.Success -> {
+                        // Обновите адаптер с полученными данными об астероидах
+                        adapter.submitData(state.data) // Используйте submitData для обновления адаптера
+                    }
+                    is ListFragmentState.Error -> {
+                        // Показать сообщение об ошибке
+                    }
+                }
+            }
+        }
     }
 
     override fun onDestroyView() {

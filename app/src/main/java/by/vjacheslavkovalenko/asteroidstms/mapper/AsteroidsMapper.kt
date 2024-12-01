@@ -7,7 +7,7 @@ import javax.inject.Inject
 import by.vjacheslavkovalenko.asteroidstms.network.entity.NearEarthObject
 import org.checkerframework.checker.units.qual.min
 
-//*****
+//555
 object AsteroidsMapper {
 
     // Преобразование из сетевой модели NearEarthObject в локальную модель Asteroids
@@ -97,8 +97,6 @@ object AsteroidsMapper {
 //
 //
 //
-
-
 
 
 //class AsteroidsMapper @Inject constructor() {

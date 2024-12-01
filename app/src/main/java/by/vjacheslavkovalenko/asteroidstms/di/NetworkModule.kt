@@ -12,18 +12,26 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import javax.inject.Singleton
 
-//*****
+//555
+
 @Module
 @InstallIn(SingletonComponent::class)
 object NetworkModule {
 
     @Provides
+    @Singleton // Обеспечиваем синглтон для OkHttpClient
     fun provideOkHttpClient(): OkHttpClient {
+        val loggingInterceptor = HttpLoggingInterceptor().apply {
+            level = HttpLoggingInterceptor.Level.BODY // Устанавливаем уровень логирования
+        }
+
         return OkHttpClient.Builder()
-            .build() // Здесь можно добавить настройки клиента, если необходимо
+            .addInterceptor(loggingInterceptor) // Добавляем интерсептор для логирования
+            .build() // Здесь можно добавить дополнительные настройки клиента, если необходимо
     }
 
     @Provides
+    @Singleton // Обеспечиваем синглтон для Retrofit
     fun provideRetrofit(okHttpClient: OkHttpClient): Retrofit {
         return Retrofit.Builder()
             .baseUrl(BASEURL) // Указываем базовый URL для API
@@ -33,6 +41,7 @@ object NetworkModule {
     }
 
     @Provides
+    @Singleton // Обеспечиваем синглтон для Api
     fun provideApi(retrofit: Retrofit): Api {
         return retrofit.create(Api::class.java) // Создаем экземпляр API интерфейса
     }

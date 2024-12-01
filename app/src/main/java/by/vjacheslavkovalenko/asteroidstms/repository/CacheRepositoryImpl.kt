@@ -16,7 +16,7 @@ import kotlinx.coroutines.flow.Flow
 import by.vjacheslavkovalenko.asteroidstms.model.AsteroidDetails
 import by.vjacheslavkovalenko.asteroidstms.model.PictureOfDay
 
-//*****
+//555
 class CacheRepositoryImpl @Inject constructor(
     private val asteroidsDao: AsteroidsDao,
     private val asteroidDetailsDao: AsteroidDetailsDao,
@@ -93,6 +93,10 @@ class CacheRepositoryImpl @Inject constructor(
             explanation = pictureOfDay.explanation
         )
         pictureOfDayDao.insertPictureOfDay(entity)
+    }
+
+    override suspend fun getAsteroidPagingSource(): PagingSource<Int, AsteroidsEntity> {
+        return asteroidsDao.pagingSource()
     }
 }
 //

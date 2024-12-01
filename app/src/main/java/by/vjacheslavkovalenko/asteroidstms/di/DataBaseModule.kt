@@ -13,31 +13,40 @@ import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import javax.inject.Singleton
 
-//*****
+//555
 @Module
 @InstallIn(SingletonComponent::class)
 object DataBaseModule {
 
     @Provides
-    fun provideAsteroidsDatabase(context: Context): AsteroidsDataBase {
-        return AsteroidsDataBase.getDatabase(context)
+    @Singleton // Обеспечиваем синглтон для базы данных
+    fun provideAsteroidsDatabase(@ApplicationContext context: Context): AsteroidsDataBase {
+        return Room.databaseBuilder(
+            context,
+            AsteroidsDataBase::class.java,
+            "asteroids_database" // Имя базы данных
+        ).build()
     }
 
     @Provides
+    @Singleton // Обеспечиваем синглтон для DAO астероидов
     fun provideAsteroidsDao(database: AsteroidsDataBase): AsteroidsDao {
         return database.getAsteroidsDao()
     }
 
     @Provides
+    @Singleton // Обеспечиваем синглтон для DAO деталей астероидов
     fun provideAsteroidDetailsDao(database: AsteroidsDataBase): AsteroidDetailsDao {
         return database.getAsteroidDetailsDao()
     }
 
     @Provides
+    @Singleton // Обеспечиваем синглтон для DAO картины дня
     fun providePictureOfDayDao(database: AsteroidsDataBase): PictureOfDayDao {
         return database.getPictureOfDayDao()
     }
 }
+
 //
 //Вот код для объекта DataBaseModule, который будет использоваться с Dagger Hilt для предоставления зависимостей, связанных с базой данных. Он будет предоставлять экземпляры базы данных и DAO классов, которые вы определили ранее.
 //

@@ -11,4 +11,5 @@ data class AsteroidResponse(
     val estimatedDiameter: EstimatedDiameter,
     @SerializedName("is_potentially_hazardous_asteroid")
     val isPotentiallyHazardous: Boolean
+//    val nearEarthObjects: List<NearEarthObject>
 )

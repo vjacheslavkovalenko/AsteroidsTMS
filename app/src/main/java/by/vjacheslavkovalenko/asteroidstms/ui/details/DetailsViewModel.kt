@@ -27,7 +27,8 @@ class DetailsViewModel @Inject constructor(
         viewModelScope.launch {
             try {
                 val asteroidDetails = loadAsteroidDetailsUseCase(asteroidId)
-                stateLiveData.value = DetailsFragmentState.Success(asteroidDetails) // Успешно получены данные
+                stateLiveData.value =
+                    asteroidDetails?.let { DetailsFragmentState.Success(it) } // Успешно получены данные
             } catch (e: Exception) {
                 stateLiveData.value = DetailsFragmentState.Error(e.message ?: "Unknown error") // Ошибка при получении данных
             }

@@ -7,7 +7,7 @@ import androidx.room.Query
 import by.vjacheslavkovalenko.asteroidstms.database.entity.AsteroidsEntity
 import androidx.room.OnConflictStrategy
 
-//*****
+//555
 @Dao
 interface AsteroidsDao {
 
@@ -19,6 +19,10 @@ interface AsteroidsDao {
 
     @Query("SELECT * FROM Asteroids WHERE asteroidId = :id LIMIT 1")
     suspend fun getAsteroidById(id: String): AsteroidsEntity? // Метод возвращает астероид по его идентификатору
+
+    // Метод для получения PagingSource
+    @Query("SELECT * FROM Asteroids")
+    fun pagingSource(): PagingSource<Int, AsteroidsEntity>
 }
 
 

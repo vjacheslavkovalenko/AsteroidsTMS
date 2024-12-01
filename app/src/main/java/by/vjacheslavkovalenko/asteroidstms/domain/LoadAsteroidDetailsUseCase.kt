@@ -7,15 +7,9 @@ import by.vjacheslavkovalenko.asteroidstms.repository.ApiRepository
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
-//class LoadAsteroidDetailsUseCase @Inject constructor(
-//    private val apiRepository: ApiRepository
-//) {
-//    suspend operator fun invoke(apiKey: String, asteroidId: String): AsteroidResponse {
-//        return apiRepository.getAsteroidById(apiKey, asteroidId)
-//    }
-//}
 
-//*****
+
+//555
 class LoadAsteroidDetailsUseCase @Inject constructor(
     private val cacheRepository: CacheRepository
 ) {
