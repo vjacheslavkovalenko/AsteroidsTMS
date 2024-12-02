@@ -12,7 +12,7 @@ fun bindAsteroidStatusImage(imageView: ImageView, isHazardous: Boolean) {
     val resource = if (isHazardous) {
         R.drawable.asteroid_hazardous // Иконка для потенциально опасного астероида
     } else {
-        R.drawable.ic_not_hazardous // Иконка для безопасного астероида
+        R.drawable.asteroid_safe // Иконка для безопасного астероида
     }
     imageView.setImageResource(resource)
 }

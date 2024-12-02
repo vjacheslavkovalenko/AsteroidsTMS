@@ -1,13 +1,14 @@
 package by.vjacheslavkovalenko.asteroidstms.api
 
 import by.vjacheslavkovalenko.asteroidstms.domain.Asteroid
+import by.vjacheslavkovalenko.asteroidstms.Constants
 import retrofit2.Response
-import org.json.JSONObject
 import java.text.SimpleDateFormat
 import java.util.*
 
 class AsteroidParser {
     companion object {
+        // Метод для парсинга ответа API и получения списка астероидов
         fun parseAsteroidsResponse(response: Response<NearEarthObjectsResponse>): List<Asteroid> {
             val asteroidList = mutableListOf<Asteroid>()
 
@@ -22,18 +23,18 @@ class AsteroidParser {
             return asteroidList
         }
 
-        // Функция для получения сегодняшней даты в формате "yyyy-MM-dd"
+        // Функция для получения сегодняшней даты в формате, заданном в API_QUERY_DATE_FORMAT
         private fun getTodayDate(): String {
             val calendar = Calendar.getInstance()
-            val dateFormat = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
+            val dateFormat = SimpleDateFormat(Constants.API_QUERY_DATE_FORMAT, Locale.getDefault())
             return dateFormat.format(calendar.time)
         }
 
         // Функция для получения даты через 6 дней от сегодняшней
         private fun getEndDate(): String {
             val calendar = Calendar.getInstance()
-            calendar.add(Calendar.DAY_OF_YEAR, 6) // Добавляем 6 дней
-            val dateFormat = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
+            calendar.add(Calendar.DAY_OF_YEAR, Constants.DEFAULT_END_DATE_DAYS) // Используем DEFAULT_END_DATE_DAYS
+            val dateFormat = SimpleDateFormat(Constants.API_QUERY_DATE_FORMAT, Locale.getDefault())
             return dateFormat.format(calendar.time)
         }
 
@@ -42,7 +43,7 @@ class AsteroidParser {
             val formattedDateList = mutableListOf<String>()
             val calendar = Calendar.getInstance()
 
-            for (i in 0 until 7) { // Генерируем 7 дней
+            for (i in 0 until Constants.DEFAULT_END_DATE_DAYS + 1) { // Генерируем 7 дней
                 formattedDateList.add(getTodayDate()) // Добавляем сегодняшнюю дату
                 calendar.add(Calendar.DAY_OF_YEAR, 1) // Переходим к следующему дню
             }
@@ -51,23 +52,3 @@ class AsteroidParser {
         }
     }
 }
-
-
-
-//class AsteroidParser {
-//    companion object {
-//        fun parseAsteroidsResponse(response: Response<NearEarthObjectsResponse>): List<Asteroid> {
-//            val asteroidList = mutableListOf<Asteroid>()
-//
-//            if (response.isSuccessful) {
-//                response.body()?.nearEarthObjects?.let { nearEarthObjects ->
-//                    for (asteroidListPerDate in nearEarthObjects.values) {
-//                        asteroidList.addAll(asteroidListPerDate)
-//                    }
-//                }
-//            }
-//
-//            return asteroidList
-//        }
-//    }
-//}
