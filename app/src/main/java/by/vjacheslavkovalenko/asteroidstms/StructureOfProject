@@ -3,60 +3,109 @@
 
 by.vjacheslavkovalenko.asteroidstms
 │
-├── database
-│   ├── AsteroidsDao.kt
-│   ├── AsteroidsDataBase.kt
-│   ├── Converters.kt
-│   ├── PictureOfDayDao.kt
-│   └── entity
-│       ├── AsteroidsEntity.kt
-│       ├── AsteroidDetailsEntity.kt
-│       └── PictureOfDayEntity.kt
+├── api
+│   └── AsteroidApiService.kt
 │
-├── di
-│   ├── DataBaseModule.kt
-│   └── RepositoryModule.kt
+├── database
+│   ├── AsteroidDao.kt
+│   └── AsteroidDatabase.kt
 │
 ├── domain
-│   ├── LoadAsteroidDetailsUseCase.kt
-│   ├── LoadAsteroidsListUseCase.kt
-│   └── LoadPictureOfDayUseCase.kt
-│
-├── model
-│   └── Asteroids.kt
+│   ├── Asteroid.kt
 │   └── PictureOfDay.kt
 │
-├── network
-│   ├── Api.kt
-│   ├── entity
-│   │   ├── AsteroidResponse.kt
-│   │   ├── ListAsteroidsResponse.kt
-│   │   └── PictureOfDayResponse.kt
-│   └── repository
-│       └── ApiRepository.kt
-│       └── ApiRepositoryImpl.kt
+├── di
+│   └── AppModule.kt
+│
+├── main
+│   ├── MainActivity.kt
+│   ├── MainFragment.kt
+│   ├── MainViewModel.kt
+│   ├── MainAdapter.kt
+│   └── main_nav_graph.xml  // Навигационный граф для фрагментов
+│
+├── detail
+│   ├── DetailFragment.kt
+│   └── DetailViewModel.kt
 │
 ├── repository
-│   ├── CacheRepository.kt
-│   └── CacheRepositoryImpl.kt
+│   └── AsteroidRepository.kt
 │
-├── ui
-│   ├── details
-│   │   ├── DetailsFragment.kt
-│   │   └── DetailsViewModel.kt
-│   │
-│   ├── list
-│   │   ├── ListFragment.kt
-│   │   ├── ListViewModel.kt
-│   │   └── adapter
-│   │       ├── AsteroidsAdapter.kt
-│   │       └── AsteroidsViewHolder.kt
+├── utils
+│   └── Utils.kt            // Вспомогательные функции и методы
 │
-└── utils
-    └── DateUtils.kt
+└── resources               // Ресурсы приложения (строки, цвета и т.д.)
+    ├── values/
+    │   ├── colors.xml      // Определение цветов приложения
+    │   ├── strings.xml     // Строковые ресурсы приложения
+    │   └── styles.xml      // Стили приложения (если есть)
+    │
+    ├── layout/
+    │   ├── fragment_main.xml       // Макет главного фрагмента
+    │   ├── fragment_detail.xml      // Макет фрагмента деталей
+    │   └── asteroid_item.xml        // Макет элемента списка астероидов
+    │
+    └── menu/
+        └── main_menu.xml           // Меню приложения (если есть)
 
 
+by.vjacheslavkovalenko.asteroidstms
+│
+├── api
+│   ├── AsteroidApiService.kt
+│   ├── AsteroidParser.kt
+│   ├── NearEarthObjectsResponse.kt
+│   └── RetrofitInstance.kt
+│
+├── database
+│   ├── AsteroidDao.kt
+│   └── AsteroidDatabase.kt
+│
+├── domain
+│   ├── Asteroid.kt
+│   └── PictureOfDay.kt
+│
+├── di
+│   └── AppModule.kt                 // Модуль для Hilt
+│
+├── main
+│   ├── MainActivity.kt              // Теперь использует Hilt для внедрения зависимостей
+│   ├── MainFragment.kt               // Теперь использует Hilt для внедрения зависимостей
+│   ├── MainViewModel.kt              // Теперь использует Hilt для внедрения зависимостей
+│   ├── MainAdapter.kt
+│   └── main_nav_graph.xml
+│
+├── detail
+│   ├── DetailFragment.kt             // Теперь использует Hilt для внедрения зависимостей
+│   └── DetailViewModel.kt            // Теперь использует Hilt для внедрения зависимостей
+│
+├── repository
+│   └── AsteroidRepository.kt         // Теперь использует Hilt для внедрения зависимостей
+│
+├── utils
+│   ├── BindingAdapters.kt
+│   └── Constants.kt
+└── resources
+    ├── values/
+    │   ├── colors.xml
+    │   ├── strings.xml
+    │   └── styles.xml
+    │
+    ├── layout/
+    │   ├── fragment_main.xml
+    │   ├── fragment_detail.xml
+    │   └── asteroid_item.xml
+    │
+    └── menu/
+        └── main_menu.xml
 
- Создание полного проекта для работы с данными об астероидах требует множества компонентов,
- включая модели данных, DAO, репозитории, ViewModel, фрагменты и адаптеры.
-С использованием Room, Hilt и Paging.
+Описание структуры:
+api: Содержит классы для работы с API, например, AsteroidApiService, который определяет методы для получения данных.
+database: Содержит классы для работы с базой данных, такие как DAO и сама база данных.
+domain: Содержит модели данных, такие как Asteroid и PictureOfDay.
+di: Содержит классы для внедрения зависимостей (например, с использованием Hilt).
+main: Основной пакет, содержащий активность, фрагменты и ViewModel для главного экрана.
+detail: Пакет для деталей астероида, включая фрагмент и ViewModel.
+repository: Содержит классы репозиториев для управления данными из различных источников.
+utils: Вспомогательные функции и методы, которые могут использоваться в разных частях приложения.
+resources: Ресурсы приложения, такие как строки, цвета и макеты.

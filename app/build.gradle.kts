@@ -76,6 +76,7 @@ dependencies {
     implementation(libs.room)
     implementation(libs.room.runtime)
     implementation(libs.room.paging)
+    implementation(libs.androidx.baselibrary)
     annotationProcessor(libs.room.compiler)
     ksp(libs.room.compiler)
     testImplementation(libs.junit)
