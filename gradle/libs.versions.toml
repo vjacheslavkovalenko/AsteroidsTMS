@@ -33,7 +33,7 @@ retrofit = "2.11.0" # https://github.com/square/retrofit/blob/master/CHANGELOG.m
 gson = "2.11.0"
 picasso = "2.8"
 glide = "4.16.0"
-paging = "3.3.2"
+paging = "3.3.4"
 room = "2.6.1"
 baselibrary = "3.2.0-alpha11"
 
@@ -50,44 +50,13 @@ lottie = { group = "com.airbnb.android", name = "lottie", version.ref = "lottie"
 navigation-fragment = { module = "androidx.navigation:navigation-fragment-ktx", version.ref = "navigation" }
 navigation-ui = { module = "androidx.navigation:navigation-ui-ktx", version.ref = "navigation" }
 
-navigation-common = { module = "androidx.navigation:navigation-common-ktx", version.ref = "navigation" }
-navigation-dynamicFeatures-fragment = { module = "androidx.navigation:navigation-dynamic-features-fragment", version.ref = "navigation" }
-navigation-dynamicFeatures-runtime = { module = "androidx.navigation:navigation-dynamic-features-runtime", version.ref = "navigation" }
-navigation-safeArgs-generator = { module = "androidx.navigation:navigation-safe-args-generator", version.ref = "navigation" }
-navigation-safeArgs-gradlePlugin = { module = "androidx.navigation:navigation-safe-args-gradle-plugin", version.ref = "navigation" }
-navigation-testing = { module = "androidx.navigation:navigation-testing", version.ref = "navigation" }
-
 room = { module = "androidx.room:room-ktx", version.ref = "room" }
 room-runtime = {group = "androidx.room", name = "room-runtime", version.ref = "room"}
-#room-common = { module = "androidx.room:room-common", version.ref = "room" }
 room-compiler = { module = "androidx.room:room-compiler", version.ref = "room" }
-#room-compiler-processing = { module = "androidx.room:room-compiler-processing", version.ref = "room" }
-#room-compiler-processing-testing = { module = "androidx.room:room-compiler-processing-testing", version.ref = "room" }
-#room-gradlePlugin = { module = "androidx.room:room-gradle-plugin", version.ref = "room" }
-#room-paging-rxjava2 = { module = "androidx.room:room-paging-rxjava2", version.ref = "room" }
-#room-paging-rxjava3 = { module = "androidx.room:room-paging-rxjava3", version.ref = "room" }
-#room-runtime = { module = "androidx.room:room-runtime", version.ref = "room" }
-#room-rxjava2 = { module = "androidx.room:room-rxjava2", version.ref = "room" }
-#room-rxjava3 = { module = "androidx.room:room-rxjava3", version.ref = "room" }
-
-#ksp-ksp = {group = "androidx.room", name = "room-compiler", version.ref = "room"}
-
-#// If this project uses any Kotlin source, use Kotlin Symbol Processing (KSP)
-#// See Add the KSP plugin to your project
-#ksp("androidx.room:room-compiler:2.6.1")
-#
-#// If this project only uses Java source, use the Java annotationProcessor
-#annotationProcessor("androidx.room:room-compiler:$room_version")
-
 
 
 # DI
-dagger = { module = "com.google.dagger:dagger", version.ref = "dagger" }
-dagger-compiler = { module = "com.google.dagger:dagger-compiler", version.ref = "dagger" }
 dagger-hilt-android = { module = "com.google.dagger:hilt-android", version.ref = "dagger" }
-dagger-hilt-android-compiler = { module = "com.google.dagger:hilt-android-compiler", version.ref = "dagger" }
-dagger-hilt-compiler = { module = "com.google.dagger:hilt-compiler", version.ref = "dagger" }
-javax-inject = { module = "javax.inject:javax.inject", version.ref = "javax-inject" }
 
 lifecycle-viewmodel-ktx = { group = "androidx.lifecycle", name = "lifecycle-viewmodel-ktx", version.ref = "lifecycle" }
 lifecycle-runtime-ktx = { group = "androidx.lifecycle", name = "lifecycle-runtime-ktx", version.ref = "lifecycle" }
