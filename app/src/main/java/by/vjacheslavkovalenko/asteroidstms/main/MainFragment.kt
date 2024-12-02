@@ -11,13 +11,11 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import dagger.hilt.android.AndroidEntryPoint
 import by.vjacheslavkovalenko.asteroidstms.databinding.FragmentMainBinding
 
-@AndroidEntryPoint
+@AndroidEntryPoint // Аннотация для поддержки Hilt.
 class MainFragment : Fragment() {
 
-    private var binding: FragmentMainBinding? = null // Привязка данных для фрагмента
-
-    private val viewModel: MainViewModel by viewModels() // Использование ViewModel с Hilt
-
+    private var binding: FragmentMainBinding? = null // Привязка данных для фрагмента.
+    private val viewModel: MainViewModel by viewModels() // Использование ViewModel с Hilt.
     private lateinit var adapter: MainAdapter
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
@@ -25,7 +23,7 @@ class MainFragment : Fragment() {
         return binding!!.root
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+    override fun onViewCreated(view: android.view.View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         setupRecyclerView()
@@ -39,7 +37,7 @@ class MainFragment : Fragment() {
             findNavController().navigate(MainFragmentDirections.actionShowDetail(asteroid))
         }
 
-        viewModel.fetchAsteroids()
+        viewModel.fetchAsteroids() // Запрос данных об астероидах.
     }
 
     private fun setupRecyclerView() {

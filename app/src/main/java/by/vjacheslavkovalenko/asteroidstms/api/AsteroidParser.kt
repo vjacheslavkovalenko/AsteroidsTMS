@@ -2,6 +2,9 @@ package by.vjacheslavkovalenko.asteroidstms.api
 
 import by.vjacheslavkovalenko.asteroidstms.domain.Asteroid
 import retrofit2.Response
+import org.json.JSONObject
+import java.text.SimpleDateFormat
+import java.util.*
 
 class AsteroidParser {
     companion object {
@@ -18,5 +21,53 @@ class AsteroidParser {
 
             return asteroidList
         }
+
+        // Функция для получения сегодняшней даты в формате "yyyy-MM-dd"
+        private fun getTodayDate(): String {
+            val calendar = Calendar.getInstance()
+            val dateFormat = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
+            return dateFormat.format(calendar.time)
+        }
+
+        // Функция для получения даты через 6 дней от сегодняшней
+        private fun getEndDate(): String {
+            val calendar = Calendar.getInstance()
+            calendar.add(Calendar.DAY_OF_YEAR, 6) // Добавляем 6 дней
+            val dateFormat = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
+            return dateFormat.format(calendar.time)
+        }
+
+        // Функция для получения списка дат на следующие 7 дней
+        fun getNextSevenDaysFormattedDates(): List<String> {
+            val formattedDateList = mutableListOf<String>()
+            val calendar = Calendar.getInstance()
+
+            for (i in 0 until 7) { // Генерируем 7 дней
+                formattedDateList.add(getTodayDate()) // Добавляем сегодняшнюю дату
+                calendar.add(Calendar.DAY_OF_YEAR, 1) // Переходим к следующему дню
+            }
+
+            return formattedDateList
+        }
     }
 }
+
+
+
+//class AsteroidParser {
+//    companion object {
+//        fun parseAsteroidsResponse(response: Response<NearEarthObjectsResponse>): List<Asteroid> {
+//            val asteroidList = mutableListOf<Asteroid>()
+//
+//            if (response.isSuccessful) {
+//                response.body()?.nearEarthObjects?.let { nearEarthObjects ->
+//                    for (asteroidListPerDate in nearEarthObjects.values) {
+//                        asteroidList.addAll(asteroidListPerDate)
+//                    }
+//                }
+//            }
+//
+//            return asteroidList
+//        }
+//    }
+//}

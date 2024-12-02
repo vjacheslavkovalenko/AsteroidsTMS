@@ -1,38 +1,23 @@
 package by.vjacheslavkovalenko.asteroidstms.utils
 
-import android.os.Build
-import androidx.annotation.RequiresApi
 import java.text.SimpleDateFormat
-import java.time.LocalDate
-import java.time.ZoneId
-import java.util.Date
-import java.time.format.DateTimeFormatter
+import java.util.*
 
 object DateUtils {
+    private const val DATE_FORMAT = "yyyy-MM-dd" // Формат даты
 
-    private val formatter: DateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd")
-
-    fun getCurrentDate(): String {
-        return LocalDate.now().format(formatter) // Возвращает сегодняшнюю дату в формате "yyyy-MM-dd".
+    // Функция для получения сегодняшней даты в формате "yyyy-MM-dd"
+    fun getTodayDate(): String {
+        val calendar = Calendar.getInstance()
+        val dateFormat = SimpleDateFormat(DATE_FORMAT, Locale.getDefault())
+        return dateFormat.format(calendar.time)
     }
 
-    fun getEndDate(startDate: String): String {
-        val startLocalDate = LocalDate.parse(startDate, formatter)
-        val endLocalDate = startLocalDate.plusDays(6) // Прибавляет 6 дней к стартовой дате.
-        return endLocalDate.format(formatter) // Возвращает конечную дату в формате "yyyy-MM-dd".
+    // Функция для получения даты через 6 дней от сегодняшней
+    fun getEndDate(): String {
+        val calendar = Calendar.getInstance()
+        calendar.add(Calendar.DAY_OF_YEAR, 6) // Добавляем 6 дней
+        val dateFormat = SimpleDateFormat(DATE_FORMAT, Locale.getDefault())
+        return dateFormat.format(calendar.time)
     }
 }
-
-//private const val PATTER_FORMAT = "yyyy-MM-dd"
-//fun Date.convertDateToString(): String {
-//    val format = SimpleDateFormat(PATTER_FORMAT)
-//    return format.format(this)
-//}
-//
-//@RequiresApi(Build.VERSION_CODES.O)
-//fun LocalDate.toDate(): Date = Date.from(this.atStartOfDay(ZoneId.systemDefault()).toInstant())
-//
-//fun String.toDate(): Date {
-//    val dateFormat = SimpleDateFormat(PATTER_FORMAT)
-//    return dateFormat.parse(this) ?: Date()
-//}
