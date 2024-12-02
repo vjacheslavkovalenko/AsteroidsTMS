@@ -27,6 +27,8 @@
     </string>
     <string name="hazardous_description">Опасность для Земли? %s</string>
     <string name="help_button_text">Получить помощь по этому пункту</string>
+    <string name="text_about_app">О приложении</string>
+    <string name="picture_of_day_detail">Картинка дня</string>
     <!--    <string name="loading">Загрузка...</string>-->
     <!--    <string name="error_message">Произошла ошибка: %1$s</string>-->
     <!--    <string name="asteroid_details">Детали Астероида</string>-->
