@@ -11,3 +11,4 @@ fun ImageView.loadUrl(url: String) {
 
 //Вызов из любого места:
 //binding?.image?.loadUrl(it.message)
+

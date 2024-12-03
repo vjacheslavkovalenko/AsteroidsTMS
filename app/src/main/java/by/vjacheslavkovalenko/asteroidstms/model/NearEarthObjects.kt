@@ -1,7 +1,7 @@
-package by.vjacheslavkovalenko.asteroidstms.api
+package by.vjacheslavkovalenko.asteroidstms.model
 
 import by.vjacheslavkovalenko.asteroidstms.domain.Asteroid
 
-data class NearEarthObjectsResponse(
+data class NearEarthObjects(
     val nearEarthObjects: Map<String, List<Asteroid>>
 )
