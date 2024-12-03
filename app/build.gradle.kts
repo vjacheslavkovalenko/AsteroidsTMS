@@ -2,8 +2,11 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.serialization)
-    alias(libs.plugins.navigation.safeargs)
+//    alias(libs.plugins.navigation.safeargs)
     alias(libs.plugins.room)
+    alias(libs.plugins.kotlin.parcelize)
+    alias(libs.plugins.ksp)
+    alias(libs.plugins.kotlin.kapt)
 }
 
 android {
@@ -73,7 +76,8 @@ dependencies {
     implementation(libs.room.paging)
     implementation(libs.androidx.baselibrary)
     annotationProcessor(libs.room.compiler)
-//    ksp(libs.room.compiler)
+    ksp(libs.room.compiler)
+//    kapt(libs.)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)

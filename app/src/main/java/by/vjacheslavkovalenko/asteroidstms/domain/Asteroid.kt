@@ -1,9 +1,13 @@
 package by.vjacheslavkovalenko.asteroidstms.domain
 
+import android.os.Parcelable
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import com.google.gson.annotations.SerializedName
+import kotlinx.parcelize.Parcelize
 
+
+@Parcelize
 @Entity(tableName = "asteroid_table")
 data class Asteroid(
     @PrimaryKey
@@ -23,4 +27,4 @@ data class Asteroid(
     val distanceFromEarth: Double,
     @SerializedName("is_potentially_hazardous_asteroid")
     val isPotentiallyHazardous: Boolean
-)
+): Parcelable

@@ -1,7 +1,6 @@
 package by.vjacheslavkovalenko.asteroidstms.api
 
 import by.vjacheslavkovalenko.asteroidstms.Constants
-import by.vjacheslavkovalenko.asteroidstms.domain.Asteroid
 import retrofit2.http.GET
 import retrofit2.Response
 import retrofit2.http.Query

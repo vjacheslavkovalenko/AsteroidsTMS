@@ -7,7 +7,7 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 import by.vjacheslavkovalenko.asteroidstms.domain.Asteroid
 
-@HiltViewModel // Аннотация для поддержки Hilt
+@HiltViewModel
 class DetailViewModel @Inject constructor() : ViewModel() {
 
     private val asteroidLiveData = MutableLiveData<Asteroid>() // Хранит данные об астероиде

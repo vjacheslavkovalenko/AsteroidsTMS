@@ -11,7 +11,7 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-@HiltViewModel // Аннотация для поддержки Hilt.
+@HiltViewModel
 class MainViewModel @Inject constructor(private val repository: AsteroidRepository) : ViewModel() {
 
     private val asteroidsLiveData = MutableLiveData<List<Asteroid>>() // Хранит список астероидов.
@@ -22,7 +22,8 @@ class MainViewModel @Inject constructor(private val repository: AsteroidReposito
         viewModelScope.launch {
             val startDate = DateUtils.getTodayDate() // Получаем сегодняшнюю дату.
             val endDate = DateUtils.getEndDate() // Получаем дату через 6 дней.
-            asteroidsLiveData.value = repository.getAsteroids(startDate, endDate) // Получаем астероиды из репозитория.
+            asteroidsLiveData.value =
+                repository.getAsteroids(startDate, endDate) // Получаем астероиды из репозитория.
         }
     }
 }

@@ -7,7 +7,7 @@ import by.vjacheslavkovalenko.asteroidstms.Constants
 object RetrofitInstance {
     private val retrofit by lazy {
         Retrofit.Builder()
-            .baseUrl(Constants.BASEURL) // Использование BASE_URL из Constants.
+            .baseUrl(Constants.BASEURL)
             .addConverterFactory(GsonConverterFactory.create())
             .build()
     }

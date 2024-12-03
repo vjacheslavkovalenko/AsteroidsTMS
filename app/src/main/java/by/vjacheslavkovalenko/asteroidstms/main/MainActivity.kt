@@ -1,7 +1,6 @@
 package by.vjacheslavkovalenko.asteroidstms.main
 
 import android.os.Bundle
-import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.fragment.NavHostFragment
 import by.vjacheslavkovalenko.asteroidstms.R
@@ -15,11 +14,12 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityMainBinding.inflate(layoutInflater) // Инициализация привязки данных
-        setContentView(binding?.root) // Используем безопасное обращение
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding?.root)
 
         // Настройка NavHostFragment для навигации между фрагментами.
-        val navHostFragment = supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment?
+        val navHostFragment =
+            supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment?
         navHostFragment?.navController?.setGraph(R.navigation.main_nav_graph)
     }
 
