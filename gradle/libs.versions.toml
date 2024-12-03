@@ -1,5 +1,6 @@
 [versions]
 agp = "8.7.3"
+hiltCompiler = "2.49"
 kotlin = "2.1.0"
 coreKtx = "1.15.0"
 junit = "4.13.2"
@@ -29,6 +30,7 @@ kotlin-parcelize = "2.1.0"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
+hilt-compiler = { module = "com.google.dagger:hilt-compiler", version.ref = "hiltCompiler" }
 junit = { group = "junit", name = "junit", version.ref = "junit" }
 androidx-junit = { group = "androidx.test.ext", name = "junit", version.ref = "junitVersion" }
 androidx-espresso-core = { group = "androidx.test.espresso", name = "espresso-core", version.ref = "espressoCore" }
@@ -76,7 +78,7 @@ ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
 navigation-safeargs = { id = "androidx.navigation.safeargs", version.ref = "navigation" }
 kotlin-parcelize = { id = "org.jetbrains.kotlin.plugin.parcelize", version.ref = "kotlin-parcelize" }
 room = { id = "androidx.room", version.ref = "room" }
-kotlin-kapt = { id = "org.jetbrains.kotlin.kapt", version.ref = "kotlin" }
+#kotlin-kapt = { id = "org.jetbrains.kotlin.kapt", version.ref = "kotlin" }
 
 firebase-crashlitycs = { id = "com.google.firebase.crashlytics", version.ref = "firebase-crashlytics-gradle" }
 gms-googleServices = { id = "com.google.gms.google-services", version.ref = "gms-googleServices" }

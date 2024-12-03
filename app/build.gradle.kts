@@ -5,8 +5,11 @@ plugins {
 //    alias(libs.plugins.navigation.safeargs)
     alias(libs.plugins.room)
     alias(libs.plugins.kotlin.parcelize)
-    alias(libs.plugins.ksp)
-    alias(libs.plugins.kotlin.kapt)
+//    alias(libs.plugins.ksp)
+//    alias(libs.plugins.kotlin.kapt)
+//    kotlin("kapt")
+//    id ("kotlin-kapt")
+    id("com.google.devtools.ksp")
 }
 
 android {
@@ -76,8 +79,31 @@ dependencies {
     implementation(libs.room.paging)
     implementation(libs.androidx.baselibrary)
     annotationProcessor(libs.room.compiler)
-    ksp(libs.room.compiler)
+//    ksp(libs.room.compiler)
 //    kapt(libs.)
+//    kapt (libs.hilt.compiler)
+//    kapt ("com.google.dagger:hilt-compiler:2.49")
+    //plugins {
+    //    alias(libs.plugins.androidApplication) apply false
+    //    alias(libs.plugins.jetbrainsKotlinAndroid) apply false
+    //    id 'com.google.dagger.hilt.android' version '2.49' apply false
+    //}
+    //——
+    //plugins {
+    //    alias(libs.plugins.androidApplication)
+    //    alias(libs.plugins.jetbrainsKotlinAndroid)
+    //    id 'kotlin-kapt'
+    //    id 'com.google.dagger.hilt.android'
+    //}
+    //
+    //
+    //    implementation "com.google.dagger:hilt-android:2.49"
+    //    kapt "com.google.dagger:hilt-compiler:2.49"
+    //
+    //    implementation 'androidx.fragment:fragment-ktx:1.8.1'
+    ksp("androidx.room:room-compiler:2.5.0")
+    implementation ("com.google.dagger:hilt-android:2.49")
+
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)

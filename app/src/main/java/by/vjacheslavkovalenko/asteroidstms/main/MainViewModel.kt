@@ -10,9 +10,13 @@ import by.vjacheslavkovalenko.asteroidstms.utils.DateUtils
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
+//import androidx.hilt.lifecycle.ViewModelInject
+
 
 @HiltViewModel
-class MainViewModel @Inject constructor(private val repository: AsteroidRepository) : ViewModel() {
+class MainViewModel @Inject constructor(
+    private val repository: AsteroidRepository
+) : ViewModel() {
 
     private val asteroidsLiveData = MutableLiveData<List<Asteroid>>() // Хранит список астероидов.
     val asteroids: LiveData<List<Asteroid>> get() = asteroidsLiveData // Геттер для LiveData.
@@ -27,3 +31,5 @@ class MainViewModel @Inject constructor(private val repository: AsteroidReposito
         }
     }
 }
+
+
