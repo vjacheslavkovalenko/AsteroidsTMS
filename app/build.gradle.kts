@@ -71,6 +71,7 @@ dependencies {
     implementation(libs.retrofit.converter.gson)
     implementation(libs.okhttp)
     implementation(libs.okhttp.loggingInterceptor)
+//    implementation("com.squareup.okhttp3:logging-interceptor:4.12.0")
     implementation(libs.gson)
     implementation(libs.glide)
     implementation(libs.paging)

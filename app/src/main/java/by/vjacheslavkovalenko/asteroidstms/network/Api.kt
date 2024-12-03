@@ -1,7 +1,7 @@
 package by.vjacheslavkovalenko.asteroidstms.network
 
 import by.vjacheslavkovalenko.asteroidstms.Constants
-import by.vjacheslavkovalenko.asteroidstms.network.entity.NearEarthObjectsResponse
+//import by.vjacheslavkovalenko.asteroidstms.network.entity.NearEarthObjectsResponse
 import by.vjacheslavkovalenko.asteroidstms.network.entity.PictureOfDayResponse
 import retrofit2.Response
 import retrofit2.http.GET
