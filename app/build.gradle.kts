@@ -5,11 +5,14 @@ plugins {
 //    alias(libs.plugins.navigation.safeargs)
     alias(libs.plugins.room)
     alias(libs.plugins.kotlin.parcelize)
-//    alias(libs.plugins.ksp)
+
+    alias(libs.plugins.ksp)
+    alias(libs.plugins.dagger.hilt.android)
+
 //    alias(libs.plugins.kotlin.kapt)
 //    kotlin("kapt")
 //    id ("kotlin-kapt")
-    id("com.google.devtools.ksp")
+
 }
 
 android {
@@ -110,7 +113,7 @@ dependencies {
     //    implementation 'androidx.fragment:fragment-ktx:1.8.1'
     ksp("androidx.room:room-compiler:2.5.0")
     //???
-//    implementation ("com.google.dagger:hilt-android:2.49")
+    implementation (libs.dagger.hilt.android)
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
