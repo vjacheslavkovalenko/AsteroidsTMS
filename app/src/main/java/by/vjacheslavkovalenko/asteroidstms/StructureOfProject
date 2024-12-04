@@ -1,115 +1,52 @@
-by.vjacheslavkovalenko.asteroidstms
-│
-├── database
-│   ├── AsteroidsDao.kt
-│   ├── AsteroidsDataBase.kt
-│   ├── Converters.kt
-│   └── entity
-│       ├── AsteroidsEntity.kt
-│       └── AsteroidDetailsEntity.kt
-│
-├── di
-│   ├── DataBaseModule.kt
-│   └── RepositoryModule.kt
-│
-├── domain
-│   ├── LoadAsteroidDetailsUseCase.kt
-│   └── LoadAsteroidsListUseCase.kt
-│
-├── model
-│   └── Asteroids.kt
-│
-├── network
-│   ├── Api.kt
-│   ├── entity
-│   │   ├── AsteroidResponse.kt
-│   │   ├── ListAsteroidsResponse.kt
-│   │   └── ListRadarAsteroidsResponse.kt
-│   └── repository
-│       └── ApiRepository.kt
-│       └── ApiRepositoryImpl.kt
-│
-├── repository
-│   ├── CacheRepository.kt
-│   └── CacheRepositoryImpl.kt
-│
-├── ui
-│   ├── details
-│   │   ├── DetailsFragment.kt
-│   │   └── DetailsViewModel.kt
-│   │
-│   └── list
-│       ├── ListFragment.kt
-│       ├── ListViewModel.kt
-│       └── adapter
-│           ├── AsteroidsAdapter.kt
-│           └── AsteroidsViewHolder.kt
-└── utils
-    └── DateUtils.kt
-
-
-
-
-    //подправил
-    //
-    //
 
 by.vjacheslavkovalenko.asteroidstms
 │
-├── database
-│   ├── AsteroidsDao.kt
-│   ├── AsteroidsDataBase.kt
-│   ├── Converters.kt
-│   ├── PictureOfDayDao.kt
-│   └── entity
-│       ├── AsteroidsEntity.kt
-│       ├── AsteroidDetailsEntity.kt
-│       └── PictureOfDayEntity.kt
+├── api
+│   ├── AsteroidApiService.kt
+│   ├── AsteroidParser.kt
+│   ├── NearEarthObjectsResponse.kt
+│   └── RetrofitInstance.kt
 │
-├── di
-│   ├── DataBaseModule.kt
-│   └── RepositoryModule.kt
+├── database
+│   ├── AsteroidDao.kt
+│   └── AsteroidDatabase.kt
 │
 ├── domain
-│   ├── LoadAsteroidDetailsUseCase.kt
-│   ├── LoadAsteroidsListUseCase.kt
-│   └── LoadPictureOfDayUseCase.kt
-│
-├── model
-│   └── Asteroids.kt
+│   ├── Asteroid.kt
 │   └── PictureOfDay.kt
 │
-├── network
-│   ├── Api.kt
-│   ├── entity
-│   │   ├── AsteroidResponse.kt
-│   │   ├── ListAsteroidsResponse.kt
-│   │   └── PictureOfDayResponse.kt
-│   └── repository
-│       └── ApiRepository.kt
-│       └── ApiRepositoryImpl.kt
+├── di
+│   └── AppModule.kt                 // Модуль для Hilt
+│
+├── main
+│   ├── MainActivity.kt              //  использует Hilt для внедрения зависимостей
+│   ├── MainFragment.kt               //  использует Hilt для внедрения зависимостей
+│   ├── MainViewModel.kt              // использует Hilt для внедрения зависимостей
+│   ├── MainAdapter.kt
+│   └── main_nav_graph.xml
+│
+├── detail
+│   ├── DetailFragment.kt             //  использует Hilt для внедрения зависимостей
+│   └── DetailViewModel.kt            //  использует Hilt для внедрения зависимостей
 │
 ├── repository
-│   ├── CacheRepository.kt
-│   └── CacheRepositoryImpl.kt
+│   └── AsteroidRepository.kt         //  использует Hilt для внедрения зависимостей
 │
-├── ui
-│   ├── details
-│   │   ├── DetailsFragment.kt
-│   │   └── DetailsViewModel.kt
-│   │
-│   ├── list
-│   │   ├── ListFragment.kt
-│   │   ├── ListViewModel.kt
-│   │   └── adapter
-│   │       ├── AsteroidsAdapter.kt
-│   │       └── AsteroidsViewHolder.kt
-│
-└── utils
-    └── DateUtils.kt
+├── utils
+│   ├── BindingAdapters.kt
+│   └── Constants.kt
+└── resources
+    ├── values/
+    │   ├── colors.xml
+    │   ├── strings.xml
+    │   └── styles.xml
+    │
+    ├── layout/
+    │   ├── fragment_main.xml
+    │   ├── fragment_detail.xml
+    │   └── asteroid_item.xml
+    │
+    └── menu/
+        └── main_menu.xml
 
 
-
- Создание полного проекта для работы с данными об астероидах требует множества компонентов,
- включая модели данных, DAO, репозитории, ViewModel, фрагменты и адаптеры.
-С использованием Room, Hilt и Paging.

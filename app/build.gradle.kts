@@ -1,9 +1,18 @@
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
-    alias(libs.plugins.hilt.android)
-    alias(libs.plugins.serialization.plugin)
-    alias(libs.plugins.navigation.safeargs.kotlin)
+    alias(libs.plugins.kotlin.serialization)
+//    alias(libs.plugins.navigation.safeargs)
+    alias(libs.plugins.room)
+    alias(libs.plugins.kotlin.parcelize)
+
+    alias(libs.plugins.ksp)
+    alias(libs.plugins.dagger.hilt.android)
+
+//    alias(libs.plugins.kotlin.kapt)
+//    kotlin("kapt")
+//    id ("kotlin-kapt")
+
 }
 
 android {
@@ -41,39 +50,71 @@ android {
     buildFeatures {
         viewBinding = true
     }
+
+    room {
+        schemaDirectory("$projectDir/schemas")
+    }
 }
 
 dependencies {
-
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
     implementation(libs.material)
     implementation(libs.androidx.activity)
     implementation(libs.androidx.constraintlayout)
     implementation(libs.lottie)
-    implementation(libs.fragment)
-    implementation(libs.retrofit)
-    implementation(libs.converter.gson)
-    implementation(libs.okhttp)
-    implementation(libs.glide)
-    implementation(libs.coroutines.core)
-    implementation(libs.coroutines.android)
-    implementation(libs.lifecycle.viewmodel.ktx)
-    implementation(libs.lifecycle.runtime.ktx)
-    implementation(libs.hilt)
-    implementation(libs.kapt)
+    implementation(libs.dagger.hilt.android)
     implementation(libs.navigation.fragment)
     implementation(libs.navigation.ui)
-    implementation(libs.room)
-    implementation(libs.ksp)
-    implementation(libs.room.ktx)
-    implementation(libs.paging)
-    implementation(libs.firebase.crashlytics.buildtools)
-    implementation(libs.room.paging)
+    implementation(libs.lifecycle.viewmodel.ktx)
+    implementation(libs.lifecycle.runtime.ktx)
+    implementation(libs.kotlinx.coroutines.android)
+    implementation(libs.kotlinx.coroutines.core)
+    implementation(libs.retrofit)
+    implementation(libs.retrofit.converter.gson)
+    implementation(libs.okhttp)
+    implementation(libs.okhttp.loggingInterceptor)
     implementation(libs.gson)
-    implementation(libs.logging.interceptor)
-    implementation(libs.hilt.ksp)
-    implementation(libs.navigation.dynamic.fragment)
+    implementation(libs.glide)
+    implementation(libs.paging)
+    implementation(libs.room)
+    implementation(libs.room.runtime)
+    implementation(libs.room.paging)
+    implementation(libs.androidx.baselibrary)
+
+    implementation(libs.androidx.hilt.common)
+
+    ksp(libs.hilt.android.compiler)
+    ksp(libs.androidx.hilt.compiler)
+
+    annotationProcessor(libs.room.compiler)
+//    ksp(libs.room.compiler)
+//    kapt(libs.)
+//    kapt (libs.hilt.compiler)
+//    kapt ("com.google.dagger:hilt-compiler:2.49")
+
+    //plugins {
+    //    alias(libs.plugins.androidApplication) apply false
+    //    alias(libs.plugins.jetbrainsKotlinAndroid) apply false
+    //    id 'com.google.dagger.hilt.android' version '2.49' apply false
+    //}
+    //——
+    //plugins {
+    //    alias(libs.plugins.androidApplication)
+    //    alias(libs.plugins.jetbrainsKotlinAndroid)
+    //    id 'kotlin-kapt'
+    //    id 'com.google.dagger.hilt.android'
+    //}
+    //
+    //
+    //    implementation "com.google.dagger:hilt-android:2.49"
+    //    kapt "com.google.dagger:hilt-compiler:2.49"
+    //
+    //    implementation 'androidx.fragment:fragment-ktx:1.8.1'
+    ksp("androidx.room:room-compiler:2.5.0")
+    //???
+    implementation (libs.dagger.hilt.android)
+
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)

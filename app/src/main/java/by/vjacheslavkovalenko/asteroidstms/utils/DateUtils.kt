@@ -1,22 +1,23 @@
 package by.vjacheslavkovalenko.asteroidstms.utils
 
-import android.os.Build
-import androidx.annotation.RequiresApi
 import java.text.SimpleDateFormat
-import java.time.LocalDate
-import java.time.ZoneId
-import java.util.Date
+import java.util.*
 
-private const val PATTER_FORMAT = "yyyy-MM-dd"
-fun Date.convertDateToString(): String {
-    val format = SimpleDateFormat(PATTER_FORMAT)
-    return format.format(this)
-}
+object DateUtils {
+    private const val DATE_FORMAT = "yyyy-MM-dd" // Формат даты
 
-@RequiresApi(Build.VERSION_CODES.O)
-fun LocalDate.toDate(): Date = Date.from(this.atStartOfDay(ZoneId.systemDefault()).toInstant())
+    // Функция для получения сегодняшней даты в формате "yyyy-MM-dd"
+    fun getTodayDate(): String {
+        val calendar = Calendar.getInstance()
+        val dateFormat = SimpleDateFormat(DATE_FORMAT, Locale.getDefault())
+        return dateFormat.format(calendar.time)
+    }
 
-fun String.toDate(): Date {
-    val dateFormat = SimpleDateFormat(PATTER_FORMAT)
-    return dateFormat.parse(this) ?: Date()
+    // Функция для получения даты через 6 дней от сегодняшней
+    fun getEndDate(): String {
+        val calendar = Calendar.getInstance()
+        calendar.add(Calendar.DAY_OF_YEAR, 6) // Добавляем 6 дней
+        val dateFormat = SimpleDateFormat(DATE_FORMAT, Locale.getDefault())
+        return dateFormat.format(calendar.time)
+    }
 }

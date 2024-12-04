@@ -1,49 +1,53 @@
-<?xml version="1.0" encoding="utf-8"?><!--//***PERPLEX***V4***XML-->
+<?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="16dp">
+    android:background="@color/app_background">
 
-    <ImageView
-        android:id="@+id/imageViewPictureOfDay"
+    <FrameLayout
+        android:id="@+id/activity_main_image_of_the_day_layout"
         android:layout_width="match_parent"
-        android:layout_height="200dp"
-        android:contentDescription="@string/picture_of_day_detail"
-        android:scaleType="centerCrop"
+        android:layout_height="220dp"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent">
 
-    <TextView
-        android:id="@+id/textViewTitle"
+        <ImageView
+            android:id="@+id/activity_main_image_of_the_day"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:adjustViewBounds="true"
+            android:contentDescription="@string/image_of_the_day"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="16dp"
+            app:layout_constraintStart_toStartOf="parent" />
+    </FrameLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/asteroid_recycler"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/activity_main_image_of_the_day_layout" />
+
+    <ProgressBar
+        android:id="@+id/status_loading_wheel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:textSize="18sp"
-        android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/imageViewPictureOfDay" />
-
-    <Button
-        android:id="@+id/buttonAboutApp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="О приложении"
-        app:layout_constraintTop_toBottomOf="@id/textViewTitle" />
-
-    <Button
-        android:id="@+id/buttonRadarAsteroids"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Радар астероидов"
-        app:layout_constraintTop_toBottomOf="@id/buttonAboutApp" />
-
-    <Button
-        android:id="@+id/buttonWhatAreAsteroids"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Что такое астероиды"
-        app:layout_constraintTop_toBottomOf="@id/buttonRadarAsteroids" />
-
+        android:indeterminate="true"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>
 
