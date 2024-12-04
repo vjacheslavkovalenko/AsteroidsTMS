@@ -78,11 +78,18 @@ dependencies {
     implementation(libs.room.runtime)
     implementation(libs.room.paging)
     implementation(libs.androidx.baselibrary)
+
+    implementation(libs.androidx.hilt.common)
+
+    ksp(libs.hilt.android.compiler)
+    ksp(libs.androidx.hilt.compiler)
+
     annotationProcessor(libs.room.compiler)
 //    ksp(libs.room.compiler)
 //    kapt(libs.)
 //    kapt (libs.hilt.compiler)
 //    kapt ("com.google.dagger:hilt-compiler:2.49")
+
     //plugins {
     //    alias(libs.plugins.androidApplication) apply false
     //    alias(libs.plugins.jetbrainsKotlinAndroid) apply false
@@ -102,7 +109,8 @@ dependencies {
     //
     //    implementation 'androidx.fragment:fragment-ktx:1.8.1'
     ksp("androidx.room:room-compiler:2.5.0")
-    implementation ("com.google.dagger:hilt-android:2.49")
+    //???
+//    implementation ("com.google.dagger:hilt-android:2.49")
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
