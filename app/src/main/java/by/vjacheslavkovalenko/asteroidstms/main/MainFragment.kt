@@ -52,7 +52,7 @@ class MainFragment : Fragment() {
             adapter.submitList(asteroids) // Обновляем адаптер с новыми данными
 
             // Управление видимостью индикатора загрузки
-            binding?.statusLoadingWheel?.visibility = if (asteroids.isEmpty()) View.VISIBLE else View.GONE
+//            binding?.statusLoadingWheel?.visibility = if (asteroids.isEmpty()) View.VISIBLE else View.GONE
         })
     }
 
